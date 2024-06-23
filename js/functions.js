@@ -1,9 +1,7 @@
 const checkStringLength = (string, maxLength) => {
-  if (string.length <= maxLength) {
-    return true;
-  }
-
-  return false;
+  // return (string.length <= maxLength);
+  const correctStringLength = string.length <= maxLength;
+  return correctStringLength;
 };
 
 checkStringLength();
