@@ -28,8 +28,15 @@ checkPalindrome();
 // поиск и вывод цифр в строке
 
 function checkStringNumber(string) {
+  if (typeof string === 'number') {
+    string = string.toString();
+    return typeof string;
+  }
 
+  // return typeof string;
 }
+
+checkStringNumber();
 
 // фукнция проверяет символы в строке и отдает цифры
 // - проверить тип  данных
