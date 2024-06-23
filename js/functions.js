@@ -15,11 +15,12 @@ function checkPalindrome(string) {
   string = string.replaceAll(' ', '').toLowerCase();
   const stringNormalize = string;
   let revertString = '';
-  for (i = stringNormalize.length - 1; i >= 0; i--) {
+  for (let i = stringNormalize.length - 1; i >= 0; i--) {
     revertString += stringNormalize.at(i);
   }
+
   const palindrome = (revertString === stringNormalize);
   return palindrome;
-};
+}
 
 checkPalindrome();
