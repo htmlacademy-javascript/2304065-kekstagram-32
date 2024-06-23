@@ -1,13 +1,8 @@
 // проверка максимальной длины строки
 
-const checkStringLength = (string, maxLength) => {
-  // линтер не проходит
-  // return (string.length <= maxLength);
-  const correctStringLength = string.length <= maxLength;
-  return correctStringLength;
-};
+const checkStringLength = (string, maxLength) => string.length <= maxLength;
 
-checkStringLength(); // если не вызывать функцию - ошибка линтера
+checkStringLength();
 
 // проверка на палиндром
 
@@ -28,12 +23,12 @@ checkPalindrome();
 // поиск и вывод цифр в строке
 
 function checkStringNumber(string) {
-  if (typeof string === 'number') {
-    string = string.toString();
-    return typeof string;
-  }
+  let listNumbers;
 
-  // return typeof string;
+  if (typeof string === 'string') {
+    listNumbers = parseInt(string, 10);
+    return listNumbers;
+  }
 }
 
 checkStringNumber();
