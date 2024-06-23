@@ -1,10 +1,9 @@
-// Функция для проверки длины строки:
-// - принять строку для проверки
-// - рассчитать длину строки (вычислить)
-// - сравнить с максимальной длиной (вычислить)
-// - вернуть результат
+const checkStringLength = (string, maxLength) => {
+  if (string.length <= maxLength) {
+    return true;
+  }
 
-const checkStringLength = (string, length) => {
+  return false;
+};
 
-}
-
+checkStringLength();
