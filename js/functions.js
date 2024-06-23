@@ -5,3 +5,9 @@ const checkStringLength = (string, maxLength) => {
 };
 
 checkStringLength();
+
+const checkPalindrome = (string) => {
+
+}
+
+checkPalindrome();
