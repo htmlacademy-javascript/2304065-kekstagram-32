@@ -39,4 +39,3 @@ function checkStringNumber(string) {
 // --- записать каждую цифру в переменную
 
 // - вернуть строку
-
