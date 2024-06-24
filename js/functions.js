@@ -2,23 +2,17 @@
 
 const checkStringLength = (string, maxLength) => string.length <= maxLength;
 
-checkStringLength();
-
 // проверка на палиндром
 
 function checkPalindrome(string) {
-  string = string.replaceAll(' ', '').toLowerCase();
-  const stringNormalize = string;
-  let revertString = '';
+  const stringNormalize = string.replaceAll(' ', '').toLowerCase();
+  let reverseString = '';
   for (let i = stringNormalize.length - 1; i >= 0; i--) {
-    revertString += stringNormalize.at(i);
+    reverseString += stringNormalize.at(i);
   }
 
-  const palindrome = (revertString === stringNormalize);
-  return palindrome;
+  return (reverseString === stringNormalize);
 }
-
-checkPalindrome();
 
 // поиск и вывод цифр в строке
 
@@ -30,8 +24,6 @@ function checkStringNumber(string) {
     return listNumbers;
   }
 }
-
-checkStringNumber();
 
 // фукнция проверяет символы в строке и отдает цифры
 // - проверить тип  данных
