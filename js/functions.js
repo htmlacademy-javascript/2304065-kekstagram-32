@@ -2,6 +2,8 @@
 
 const checkStringLength = (string, maxLength) => string.length <= maxLength;
 
+checkStringLength();
+
 // проверка на палиндром
 
 function checkPalindrome(string) {
@@ -13,3 +15,5 @@ function checkPalindrome(string) {
 
   return (reverseString === stringNormalize);
 }
+
+checkPalindrome();
