@@ -38,18 +38,18 @@ getRandomInteger();
 
 // итоговый объект должен быть таков
 
-// let photoDesc = {
-//   id: '',
-//   url: '',
-//   description: '',
-//   likes: '',
-//   comments: [{
-//     id: '',
-//     avatar: '',
-//     message: '',
-//     name: ''
-//   }];
-// };
+const photoDesc = {
+  id: '',
+  url: '',
+  description: '',
+  likes: '',
+  comments: [{
+    id: '',
+    avatar: '',
+    message: '',
+    name: ''
+  }]
+};
 
 // В файле main.js напишите необходимые функции для создания массива из 25 сгенерированных объектов. Каждый объект массива — описание фотографии, опубликованной пользователем.
 
