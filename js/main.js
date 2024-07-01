@@ -18,6 +18,14 @@ const MESSAGE_COMMENT = [
 
 const QUANTITY_COMMENTS = 25;
 
+const MIN_ID_PHOTO = 1;
+const MAX_ID_PHOTO = 25;
+
+const MIN_ID_URL = 1;
+const MAX_ID_URL = 25;
+
+const MIN_LIKES = 15;
+const MAX_LIKES = 200;
 
 const getRandomInteger = (a, b) => {
   let lower = Math.ceil(Math.min(a, b));
