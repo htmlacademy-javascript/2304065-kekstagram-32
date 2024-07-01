@@ -5,7 +5,7 @@ let nickNameComment = [
   'Михаил',
   'Николя',
   'Степашка'
-]
+];
 
 let messageComment = [
   'Всё отлично!',
@@ -14,10 +14,31 @@ let messageComment = [
   'Моя бабушка случайно чихнула с фотоаппаратом в руках и у неё получилась фотография лучше.',
   'Я поскользнулся на банановой кожуре и уронил фотоаппарат на кота и у меня получилась фотография лучше.',
   'Лица у людей на фотке перекошены, как будто их избивают. Как можно было поймать такой неудачный момент?!'
-]
+];
 
 const QUANTITY_COMMENTS = 25;
 
+let getRandomInteger = (a, b) => {
+  let lower = Math.ceil(Math.min(a, b));
+  let upper = Math.floor(Math.max(a, b));
+  let result = Math.random() * (upper - lower + 1) + lower;
+  return Math.floor(result);
+};
+
+// итоговый объект должен быть таков
+
+// let photoDesc = {
+//   id: '',
+//   url: '',
+//   description: '',
+//   likes: '',
+//   comments: [{
+//     id: '',
+//     avatar: '',
+//     message: '',
+//     name: ''
+//   }];
+// };
 
 
 
