@@ -1,4 +1,4 @@
-let nickNameComment = [
+const NICKNAME_COMMENT = [
   'Кекс',
   'Мартин',
   'Барсик',
@@ -7,7 +7,7 @@ let nickNameComment = [
   'Степашка'
 ];
 
-let messageComment = [
+const MESSAGE_COMMENT = [
   'Всё отлично!',
   'В целом всё неплохо. Но не всё.',
   'Когда вы делаете фотографию, хорошо бы убирать палец из кадра. В конце концов это просто непрофессионально.',
@@ -18,12 +18,15 @@ let messageComment = [
 
 const QUANTITY_COMMENTS = 25;
 
-let getRandomInteger = (a, b) => {
+
+const getRandomInteger = (a, b) => {
   let lower = Math.ceil(Math.min(a, b));
   let upper = Math.floor(Math.max(a, b));
   let result = Math.random() * (upper - lower + 1) + lower;
   return Math.floor(result);
 };
+
+getRandomInteger();
 
 // итоговый объект должен быть таков
 
@@ -39,8 +42,6 @@ let getRandomInteger = (a, b) => {
 //     name: ''
 //   }];
 // };
-
-
 
 // В файле main.js напишите необходимые функции для создания массива из 25 сгенерированных объектов. Каждый объект массива — описание фотографии, опубликованной пользователем.
 
