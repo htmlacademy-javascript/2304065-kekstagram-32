@@ -16,7 +16,7 @@ const MESSAGE_COMMENT = [
   'Лица у людей на фотке перекошены, как будто их избивают. Как можно было поймать такой неудачный момент?!'
 ];
 
-const QUANTITY_COMMENTS = 25;
+const QUANTITY_PHOTO = 25;
 
 const MIN_ID_PHOTO = 1;
 const MAX_ID_PHOTO = 25;
@@ -27,6 +27,15 @@ const MAX_ID_URL = 25;
 const MIN_LIKES = 15;
 const MAX_LIKES = 200;
 
+const MIN_COMMENTS = 0;
+const MAX_COMMENTS = 30;
+
+const MIN_ID_COMMENTS = 0;
+const MAX_ID_COMMENTS = 300;
+
+const MIN_ID_AVATAR = 1;
+const MAX_ID_AVATAR = 6;
+
 const getRandomInteger = (a, b) => {
   let lower = Math.ceil(Math.min(a, b));
   let upper = Math.floor(Math.max(a, b));
@@ -34,21 +43,29 @@ const getRandomInteger = (a, b) => {
   return Math.floor(result);
 };
 
-getRandomInteger();
-
 // итоговый объект должен быть таков
 
-const photoDesc = {
-  id: '',
-  url: '',
-  description: '',
-  likes: '',
-  comments: [{
-    id: '',
-    avatar: '',
-    message: '',
-    name: ''
-  }]
+const photoDesc = () => {
+  const randomId = getRandomInteger(MIN_ID_PHOTO, MAX_ID_PHOTO);
+  const randomUrl = getRandomInteger(MIN_ID_URL, MAX_ID_URL);
+  const randomLikes = getRandomInteger(MIN_LIKES, MAX_LIKES);
+  const randomComments = getRandomInteger(MIN_COMMENTS, MAX_COMMENTS);
+  const randomAvatar = getRandomInteger(MIN_ID_AVATAR, MAX_ID_AVATAR);
+  const randomIdComments = getRandomInteger(MIN_ID_COMMENTS, MAX_ID_COMMENTS);
+  const randomNickname = getRandomInteger(0, NICKNAME_COMMENT.length - 1);
+
+  return {
+    id: randomId,
+    url: `photos/${randomUrl}.jpg`,
+    description: '#отпуск' + 'Сейчас я дома уже',
+    likes: randomLikes,
+    comments: {
+      id: randomIdComments,
+      avatar: `img/avatar-${randomAvatar}.svg`,
+      message: MESSAGE_COMMENT[randomComments],
+      name: NICKNAME_COMMENT[randomNickname]
+    }
+  }
 };
 
 // В файле main.js напишите необходимые функции для создания массива из 25 сгенерированных объектов. Каждый объект массива — описание фотографии, опубликованной пользователем.
@@ -58,8 +75,6 @@ const photoDesc = {
 // id, число — идентификатор опубликованной фотографии. Это число от 1 до 25. Идентификаторы не должны повторяться.
 
 // url, строка — адрес картинки вида photos/{{i}}.jpg, где {{i}} — это число от 1 до 25. Адреса картинок не должны повторяться.
-
-// description, строка — описание фотографии. Описание придумайте самостоятельно.
 
 // likes, число — количество лайков, поставленных фотографии. Случайное число от 15 до 200.
 
