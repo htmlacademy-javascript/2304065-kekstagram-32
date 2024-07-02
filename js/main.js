@@ -27,7 +27,7 @@ const MAX_ID_URL = 25;
 const MIN_LIKES = 15;
 const MAX_LIKES = 200;
 
-const MIN_COMMENTS = 0;
+const MIN_COMMENTS = 1;
 const MAX_COMMENTS = 30;
 
 const MIN_ID_COMMENTS = 0;
@@ -63,12 +63,16 @@ const createPhotoDesc = () => {
     // конструкция некорректно выводится в консоль
     description: 'Сейчас я дома уже',
     likes: randomLikes,
-    comments: {
+    comment: {
       id: randomIdComments,
       avatar: `img/avatar-${randomAvatar}.svg`,
       message: MESSAGE_COMMENT[randomCommentsMessage],
       name: NICKNAME_COMMENT[randomNickname]
-    }
+    },
+
+    // getComment: function() {
+    //   return Array.from({length: randomCommentsQuantity}, createPhotoDesc.comment);
+    // }
   };
 };
 
