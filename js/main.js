@@ -37,11 +37,27 @@ const MIN_ID_AVATAR = 1;
 const MAX_ID_AVATAR = 6;
 
 const getRandomInteger = (a, b) => {
-  let lower = Math.ceil(Math.min(a, b));
-  let upper = Math.floor(Math.max(a, b));
-  let result = Math.random() * (upper - lower + 1) + lower;
+  const lower = Math.ceil(Math.min(a, b));
+  const upper = Math.floor(Math.max(a, b));
+  const result = Math.random() * (upper - lower + 1) + lower;
   return Math.floor(result);
 };
+
+function createUniqNumber(minNum, maxNum) {
+  let randomValues = [];
+
+}
+
+// Проверка на уникальное число
+// создаем фукнцию с диапазоном чисел
+// заводим переменную текущее значение и записываем туда наш рандом
+// создаем пустой массив
+// добавляем рандомное значение
+// перебираем массив и делаем проверку
+// если новое текущее значение НЕ равно значениям в массиве - делаем пуш
+// если новое текущее занчение равно - ++
+// если новое ntreott значение > верхней границы - присвоить нижнюю
+
 
 // итоговый объект должен быть таков
 
@@ -50,10 +66,7 @@ const createPhotoDesc = () => {
   const randomUrl = getRandomInteger(MIN_ID_URL, MAX_ID_URL);
   const randomLikes = getRandomInteger(MIN_LIKES, MAX_LIKES);
   const randomCommentsQuantity = getRandomInteger(MIN_COMMENTS, MAX_COMMENTS);
-  const randomCommentsMessage = getRandomInteger(0, MESSAGE_COMMENT.length - 1);
-  const randomAvatar = getRandomInteger(MIN_ID_AVATAR, MAX_ID_AVATAR);
-  const randomIdComments = getRandomInteger(MIN_ID_COMMENTS, MAX_ID_COMMENTS);
-  const randomNickname = getRandomInteger(0, NICKNAME_COMMENT.length - 1);
+  const comment = Array.from({length: randomCommentsQuantity}, createComment);
 
   return {
     id: randomId,
@@ -63,22 +76,31 @@ const createPhotoDesc = () => {
     // конструкция некорректно выводится в консоль
     description: 'Сейчас я дома уже',
     likes: randomLikes,
+    comment
+  };
+};
+
+function createComment() {
+  // const randomCommentsQuantity = getRandomInteger(MIN_COMMENTS, MAX_COMMENTS);
+  const randomCommentsMessage = getRandomInteger(0, MESSAGE_COMMENT.length - 1);
+  const randomAvatar = getRandomInteger(MIN_ID_AVATAR, MAX_ID_AVATAR);
+  const randomIdComments = getRandomInteger(MIN_ID_COMMENTS, MAX_ID_COMMENTS);
+  const randomNickname = getRandomInteger(0, NICKNAME_COMMENT.length - 1);
+
+  return {
     comment: {
       id: randomIdComments,
       avatar: `img/avatar-${randomAvatar}.svg`,
       message: MESSAGE_COMMENT[randomCommentsMessage],
       name: NICKNAME_COMMENT[randomNickname]
-    },
-
-    // getComment: function() {
-    //   return Array.from({length: randomCommentsQuantity}, createPhotoDesc.comment);
-    // }
+    }
   };
-};
+}
 
 const photoDesc = Array.from({length: QUANTITY_PHOTO}, createPhotoDesc);
 
 console.log(photoDesc);
+
 
 // В файле main.js напишите необходимые функции для создания массива из 25 сгенерированных объектов. Каждый объект массива — описание фотографии, опубликованной пользователем.
 
@@ -100,6 +122,3 @@ console.log(photoDesc);
 
 
 // У каждого комментария есть идентификатор — id — любое число. Идентификаторы не должны повторяться.
-
-
-
