@@ -58,10 +58,7 @@ function createUniqNumber(minNum, maxNum) {
 // если новое текущее занчение равно - ++
 // если новое ntreott значение > верхней границы - присвоить нижнюю
 
-
-// итоговый объект должен быть таков
-
-const createPhotoDesc = () => {
+function createPhotoDesc() {
   const randomId = getRandomInteger(MIN_ID_PHOTO, MAX_ID_PHOTO);
   const randomUrl = getRandomInteger(MIN_ID_URL, MAX_ID_URL);
   const randomLikes = getRandomInteger(MIN_LIKES, MAX_LIKES);
@@ -71,17 +68,13 @@ const createPhotoDesc = () => {
   return {
     id: randomId,
     url: `photos/${randomUrl}.jpg`,
-    // description: `#отпуск
-    // Сейчас я дома уже`,
-    // конструкция некорректно выводится в консоль
     description: 'Сейчас я дома уже',
     likes: randomLikes,
     comment
   };
-};
+}
 
 function createComment() {
-  // const randomCommentsQuantity = getRandomInteger(MIN_COMMENTS, MAX_COMMENTS);
   const randomCommentsMessage = getRandomInteger(0, MESSAGE_COMMENT.length - 1);
   const randomAvatar = getRandomInteger(MIN_ID_AVATAR, MAX_ID_AVATAR);
   const randomIdComments = getRandomInteger(MIN_ID_COMMENTS, MAX_ID_COMMENTS);
@@ -101,8 +94,6 @@ const photoDesc = Array.from({length: QUANTITY_PHOTO}, createPhotoDesc);
 
 console.log(photoDesc);
 
-
-// В файле main.js напишите необходимые функции для создания массива из 25 сгенерированных объектов. Каждый объект массива — описание фотографии, опубликованной пользователем.
 
 // Структура каждого объекта должна быть следующей:
 
