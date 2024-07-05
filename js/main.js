@@ -27,7 +27,7 @@ const MAX_ID_URL = 25;
 const MIN_LIKES = 15;
 const MAX_LIKES = 200;
 
-const MIN_COMMENTS = 1;
+const MIN_COMMENTS = 0;
 const MAX_COMMENTS = 30;
 
 const MIN_ID_COMMENTS = 0;
