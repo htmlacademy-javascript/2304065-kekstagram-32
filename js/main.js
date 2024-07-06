@@ -93,4 +93,4 @@ function createComment() {
 
 const photoDesc = Array.from({length: QUANTITY_PHOTO}, createPhotoDesc);
 
-console.log(photoDesc);
+photoDesc();
