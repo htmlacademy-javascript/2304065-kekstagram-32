@@ -1,5 +1,4 @@
-import './data.js';
-import './functions.js';
-import { photoDesc } from './data.js';
+import {photoDesc} from './data.js';
 
-photoDesc();
+// photoDesc();
+console.log(photoDesc);
