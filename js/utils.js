@@ -21,4 +21,5 @@ function createUniqNumber(minNum, maxNum) {
   };
 }
 
+export {getRandomInteger};
 export {createUniqNumber};
