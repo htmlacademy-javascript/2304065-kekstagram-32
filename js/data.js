@@ -1,5 +1,4 @@
-import { createUniqNumber } from './utils.js';
-import { getRandomInteger } from './utils.js';
+import { createUniqNumber, getRandomInteger } from './utils.js';
 
 const NICKNAME_COMMENT = [
   'Кекс',
