@@ -1,3 +1,6 @@
+const pictureTemplate = document.querySelector('#picture').content.querySelector('.picture');
+
+const pictureElement = pictureTemplate.cloneNode(true);
 
 
 
