@@ -1,19 +1,18 @@
 const pictureTemplate = document.querySelector('#picture').content.querySelector('.picture');
 const pictureContainer = document.querySelector('.pictures');
-const fragement = document.createDocumentFragment();
 
 function renderPosts(posts) {
   const pictureElement = pictureTemplate.cloneNode(true);
-  console.log(pictureElement);
+  const fragment = document.createDocumentFragment();
   posts.forEach((item) => {
     pictureElement.querySelector('.picture__img').src = item.url;
     pictureElement.querySelector('.picture__img').alt = item.description;
-    pictureElement.querySelector('.picture__comments').textContent = item.comment;
+    pictureElement.querySelector('.picture__comments').textContent = item.comment.length;
     pictureElement.querySelector('.picture__likes').textContent = item.likes;
-    fragement.append(item);
+    fragment.append(item);
   });
 
-  pictureContainer.append(fragement);
+  pictureContainer.append(fragment);
 }
 
 export {renderPosts};
