@@ -4,6 +4,7 @@ const pictureContainer = document.querySelector('.pictures');
 function renderPosts(posts) {
   const pictureElement = pictureTemplate.cloneNode(true);
   const fragment = document.createDocumentFragment();
+
   posts.forEach((item) => {
     pictureElement.querySelector('.picture__img').src = item.url;
     pictureElement.querySelector('.picture__img').alt = item.description;
