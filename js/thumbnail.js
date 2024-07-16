@@ -1,11 +1,10 @@
 const pictureTemplate = document.querySelector('#picture').content.querySelector('.picture');
 const pictureContainer = document.querySelector('.pictures');
+const fragment = document.createDocumentFragment();
 
 function renderPosts(posts) {
-  const pictureElement = pictureTemplate.cloneNode(true);
-  const fragment = document.createDocumentFragment();
-
   posts.forEach((item) => {
+    const pictureElement = pictureTemplate.cloneNode(true);
     pictureElement.querySelector('.picture__img').src = item.url;
     pictureElement.querySelector('.picture__img').alt = item.description;
     pictureElement.querySelector('.picture__comments').textContent = item.comment.length;
@@ -16,4 +15,4 @@ function renderPosts(posts) {
   pictureContainer.appendChild(fragment);
 }
 
-export {renderPosts};
+export { renderPosts };
