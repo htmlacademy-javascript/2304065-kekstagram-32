@@ -14,11 +14,11 @@ function createUniqNumber (min, max) {
       return null;
     }
     while (previousNumb.includes(currentNum)) {
-      currentNum = getRandomInteger (min, max);
+      currentNum = getRandomInteger(min, max);
     }
     previousNumb.push(currentNum);
     return currentNum;
   };
 }
 
-export {getRandomInteger, createUniqNumber};
+export { createUniqNumber, getRandomInteger};
