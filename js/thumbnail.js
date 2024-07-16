@@ -10,10 +10,10 @@ function renderPosts(posts) {
     pictureElement.querySelector('.picture__img').alt = item.description;
     pictureElement.querySelector('.picture__comments').textContent = item.comment.length;
     pictureElement.querySelector('.picture__likes').textContent = item.likes;
-    fragment.append(item);
+    fragment.appendChild(pictureElement);
   });
 
-  pictureContainer.append(fragment);
+  pictureContainer.appendChild(fragment);
 }
 
 export {renderPosts};
