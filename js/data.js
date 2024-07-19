@@ -38,9 +38,10 @@ const MAX_ID_COMMENTS = 999;
 const MIN_ID_AVATAR = 1;
 const MAX_ID_AVATAR = 6;
 
+const randomId = createUniqNumber(MIN_ID_PHOTO, MAX_ID_PHOTO);
+const randomUrl = createUniqNumber(MIN_ID_URL, MAX_ID_URL);
+
 function createPhotoDesc() {
-  const randomId = createUniqNumber(MIN_ID_PHOTO, MAX_ID_PHOTO);
-  const randomUrl = createUniqNumber(MIN_ID_URL, MAX_ID_URL);
   const randomLikes = getRandomInteger(MIN_LIKES, MAX_LIKES);
   const randomCommentsQuantity = getRandomInteger(MIN_COMMENTS, MAX_COMMENTS);
   const comment = Array.from({length: randomCommentsQuantity}, createComment);
@@ -54,10 +55,11 @@ function createPhotoDesc() {
   };
 }
 
+const randomIdComments = createUniqNumber(MIN_ID_COMMENTS, MAX_ID_COMMENTS);
+
 function createComment() {
   const randomCommentsMessage = getRandomInteger(0, MESSAGE_COMMENT.length - 1);
   const randomAvatar = getRandomInteger(MIN_ID_AVATAR, MAX_ID_AVATAR);
-  const randomIdComments = createUniqNumber(MIN_ID_COMMENTS, MAX_ID_COMMENTS);
   const randomNickname = getRandomInteger(0, NICKNAME_COMMENT.length - 1);
 
   return {
