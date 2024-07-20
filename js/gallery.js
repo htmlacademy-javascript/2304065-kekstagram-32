@@ -1,5 +1,22 @@
+import { photoDesc } from './data.js';
 import { renderPosts } from './thumbnail.js';
 
+renderPosts(photoDesc);
+
+const pictureContainer = document.querySelector('.pictures');
+const smallPicture = pictureContainer.querySelectorAll('.picture');
+const bigPictureContainer = document.querySelector('.big-picture');
+
+smallPicture.forEach((picture) => {
+  picture.addEventListener('click', function(evt){
+    evt.preventDefault();
+    bigPictureContainer.classList.remove('hidden');
+  });
+});
+
+console.log (pictureContainer);
+console.log (smallPicture);
+console.log (bigPictureContainer);
 
 
 
@@ -32,8 +49,6 @@ import { renderPosts } from './thumbnail.js';
 // </li>
 
 //         Копировать
-
-
 
 // Описание фотографии description вставьте строкой в блок .social__caption.
 
