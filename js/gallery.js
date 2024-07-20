@@ -6,13 +6,18 @@ renderPosts(photoDesc);
 const pictureContainer = document.querySelector('.pictures');
 const smallPicture = pictureContainer.querySelectorAll('.picture');
 const bigPictureContainer = document.querySelector('.big-picture');
+const bigPictureContainerClose = bigPictureContainer.querySelector('#picture-cancel');
 
 smallPicture.forEach((picture) => {
-  picture.addEventListener('click', function(evt){
+  picture.addEventListener('click', function(evt) {
     evt.preventDefault();
     bigPictureContainer.classList.remove('hidden');
   });
 });
+
+bigPictureContainerClose.addEventListener('click', function () {
+  bigPictureContainer.classList.add('hidden');
+})
 
 console.log (pictureContainer);
 console.log (smallPicture);

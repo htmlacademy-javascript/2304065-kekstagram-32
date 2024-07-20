@@ -1,4 +1,1 @@
 import './gallery.js';
-
-
-
