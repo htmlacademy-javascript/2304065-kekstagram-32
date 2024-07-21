@@ -8,21 +8,29 @@ const smallPicture = pictureContainer.querySelectorAll('.picture');
 const bigPictureContainer = document.querySelector('.big-picture');
 const bigPictureContainerClose = bigPictureContainer.querySelector('#picture-cancel');
 
+function openBigPicture () {
+  bigPictureContainer.classList.remove('hidden');
+};
+
+function closeBigPicture () {
+  bigPictureContainer.classList.add('hidden');
+}
+
 smallPicture.forEach((picture) => {
   picture.addEventListener('click', function(evt) {
     evt.preventDefault();
-    bigPictureContainer.classList.remove('hidden');
+    openBigPicture();
   });
 });
 
 bigPictureContainerClose.addEventListener('click', function () {
-  bigPictureContainer.classList.add('hidden');
+  closeBigPicture();
 });
 
 document.addEventListener('keydown', function (evt) {
   if (isEscapeEvt(evt)) {
     evt.preventDefault();
-    bigPictureContainer.classList.add('hidden');
+    closeBigPicture();
   };
 });
 
