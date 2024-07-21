@@ -10,10 +10,12 @@ const bigPictureContainerClose = bigPictureContainer.querySelector('#picture-can
 
 function openBigPicture () {
   bigPictureContainer.classList.remove('hidden');
+  document.addEventListener('keydown', onDocumentKeydown);
 };
 
 function closeBigPicture () {
   bigPictureContainer.classList.add('hidden');
+  document.removeEventListener('keydown', onDocumentKeydown);
 }
 
 smallPicture.forEach((picture) => {
@@ -27,15 +29,15 @@ bigPictureContainerClose.addEventListener('click', function () {
   closeBigPicture();
 });
 
-document.addEventListener('keydown', function (evt) {
+function isEscapeEvt (evt) {
+  return evt.key === 'Escape';
+}
+
+function onDocumentKeydown (evt) {
   if (isEscapeEvt(evt)) {
     evt.preventDefault();
     closeBigPicture();
   };
-});
-
-function isEscapeEvt (evt) {
-  return evt.key === 'Escape';
 }
 
 console.log (pictureContainer);
