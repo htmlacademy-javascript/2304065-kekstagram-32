@@ -31,20 +31,14 @@ bigPictureContainerClose.addEventListener('click', function () {
 
 function isEscapeEvt (evt) {
   return evt.key === 'Escape';
-}
+};
 
 function onDocumentKeydown (evt) {
   if (isEscapeEvt(evt)) {
     evt.preventDefault();
     closeBigPicture();
-  };
+  }
 }
-
-console.log (pictureContainer);
-console.log (smallPicture);
-console.log (bigPictureContainer);
-
-
 
 // Задача
 // Реализовать сценарий просмотра фотографий в полноразмерном режиме. В таком режиме пользователь получает несколько дополнительных возможностей: детально рассмотреть изображение, поставить «лайк», почитать комментарии, оставленные другими пользователями.
