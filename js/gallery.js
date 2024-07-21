@@ -20,11 +20,15 @@ bigPictureContainerClose.addEventListener('click', function () {
 });
 
 document.addEventListener('keydown', function (evt) {
-  if (evt.key === 'Escape') {
+  if (isEscapeEvt(evt)) {
     evt.preventDefault();
     bigPictureContainer.classList.add('hidden');
   };
-})
+});
+
+function isEscapeEvt (evt) {
+  return evt.key === 'Escape';
+}
 
 console.log (pictureContainer);
 console.log (smallPicture);
