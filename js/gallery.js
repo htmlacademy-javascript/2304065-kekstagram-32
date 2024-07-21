@@ -17,6 +17,13 @@ smallPicture.forEach((picture) => {
 
 bigPictureContainerClose.addEventListener('click', function () {
   bigPictureContainer.classList.add('hidden');
+});
+
+document.addEventListener('keydown', function (evt) {
+  if (evt.key === 'Escape') {
+    evt.preventDefault();
+    bigPictureContainer.classList.add('hidden');
+  };
 })
 
 console.log (pictureContainer);
