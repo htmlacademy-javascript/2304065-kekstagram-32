@@ -1,29 +1,26 @@
 import { photoDesc } from './data.js';
-import { renderPosts } from './thumbnail.js';
+import { renderPosts, picturesContainer } from './thumbnail.js';
 
 renderPosts(photoDesc);
 
-const pictureContainer = document.querySelector('.pictures');
-const smallPicture = pictureContainer.querySelectorAll('.picture');
 const bigPictureContainer = document.querySelector('.big-picture');
 const bigPictureContainerClose = bigPictureContainer.querySelector('#picture-cancel');
 
-function openBigPicture () {
-  bigPictureContainer.classList.remove('hidden');
-  document.addEventListener('keydown', onDocumentKeydown);
-};
+
+function openBigPicture(evt) {
+  evt.preventDefault();
+
+  if (evt.target.closest('.picture')) {
+    bigPictureContainer.classList.remove('hidden');
+    document.addEventListener('keydown', onDocumentKeydown);
+
+  }
+}
 
 function closeBigPicture () {
   bigPictureContainer.classList.add('hidden');
   document.removeEventListener('keydown', onDocumentKeydown);
 }
-
-smallPicture.forEach((picture) => {
-  picture.addEventListener('click', function(evt) {
-    evt.preventDefault();
-    openBigPicture();
-  });
-});
 
 bigPictureContainerClose.addEventListener('click', function () {
   closeBigPicture();
@@ -39,6 +36,8 @@ function onDocumentKeydown (evt) {
     closeBigPicture();
   }
 }
+
+picturesContainer.addEventListener('click', openBigPicture);
 
 // Задача
 // Реализовать сценарий просмотра фотографий в полноразмерном режиме. В таком режиме пользователь получает несколько дополнительных возможностей: детально рассмотреть изображение, поставить «лайк», почитать комментарии, оставленные другими пользователями.

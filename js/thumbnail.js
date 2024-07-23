@@ -1,5 +1,5 @@
 const pictureTemplate = document.querySelector('#picture').content.querySelector('.picture');
-const pictureContainer = document.querySelector('.pictures');
+const picturesContainer = document.querySelector('.pictures');
 const fragment = document.createDocumentFragment();
 
 function renderPosts(posts) {
@@ -9,10 +9,11 @@ function renderPosts(posts) {
     pictureElement.querySelector('.picture__img').alt = item.description;
     pictureElement.querySelector('.picture__comments').textContent = item.comment.length;
     pictureElement.querySelector('.picture__likes').textContent = item.likes;
+    pictureElement.dataset.postId = item.id;
     fragment.appendChild(pictureElement);
   });
 
-  pictureContainer.appendChild(fragment);
+  picturesContainer.appendChild(fragment);
 }
 
-export { renderPosts };
+export { renderPosts, picturesContainer };
