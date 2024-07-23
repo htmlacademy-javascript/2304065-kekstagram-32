@@ -10,10 +10,9 @@ const bigPictureContainerClose = bigPictureContainer.querySelector('#picture-can
 function openBigPicture(evt) {
   evt.preventDefault();
 
-  if (evt.target.closest('.picture')) {
+  if (evt.target.closest('.pictures')) {
     bigPictureContainer.classList.remove('hidden');
     document.addEventListener('keydown', onDocumentKeydown);
-
   }
 }
 
@@ -42,7 +41,7 @@ picturesContainer.addEventListener('click', openBigPicture);
 // Задача
 // Реализовать сценарий просмотра фотографий в полноразмерном режиме. В таком режиме пользователь получает несколько дополнительных возможностей: детально рассмотреть изображение, поставить «лайк», почитать комментарии, оставленные другими пользователями.
 
-// Заведите модуль, который будет отвечать за отрисовку окна с полноразмерным изображением.
+
 
 // Окно должно открываться при клике на миниатюру. Данные для окна (изображение, комментарии, лайки и так далее) берите из того же объекта, который использовался для отрисовки соответствующей миниатюры.
 
