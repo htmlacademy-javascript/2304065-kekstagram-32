@@ -9,7 +9,7 @@ function renderPosts(posts) {
     pictureElement.querySelector('.picture__img').alt = item.description;
     pictureElement.querySelector('.picture__comments').textContent = item.comment.length;
     pictureElement.querySelector('.picture__likes').textContent = item.likes;
-    pictureElement.dataset.postId = item.id;
+    // pictureElement.dataset.postId = item.id;
     fragment.appendChild(pictureElement);
   });
 

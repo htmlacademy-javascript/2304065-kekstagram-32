@@ -4,6 +4,10 @@ import { renderPosts, picturesContainer } from './thumbnail.js';
 renderPosts(photoDesc);
 
 const bigPictureContainer = document.querySelector('.big-picture');
+const bigPictureImage = bigPictureContainer.querySelector('img');
+const bigPictureLikesCount = bigPictureContainer.querySelector('.likes-count');
+const bigPictureCommentsCount = bigPictureContainer.querySelector('.social__comment-total-count');
+const bigPictureDesc = bigPictureContainer.querySelector('.social__caption');
 const bigPictureContainerClose = bigPictureContainer.querySelector('#picture-cancel');
 
 
@@ -13,6 +17,11 @@ function openBigPicture(evt) {
   if (evt.target.closest('.pictures')) {
     bigPictureContainer.classList.remove('hidden');
     document.addEventListener('keydown', onDocumentKeydown);
+    bigPictureImage.src = evt.target.src;
+    bigPictureImage.alt = evt.target.alt;
+    bigPictureLikesCount.textContent = evt.target.parentNode.querySelector('.picture__likes').textContent;
+    bigPictureCommentsCount.textContent = evt.target.parentNode.querySelector('.picture__comments').textContent;
+    bigPictureDesc.textContent = evt.target.alt;
   }
 }
 
@@ -45,15 +54,10 @@ picturesContainer.addEventListener('click', openBigPicture);
 
 // Окно должно открываться при клике на миниатюру. Данные для окна (изображение, комментарии, лайки и так далее) берите из того же объекта, который использовался для отрисовки соответствующей миниатюры.
 
-// Для отображения окна нужно удалять класс hidden у элемента .big-picture и каждый раз заполнять его данными о конкретной фотографии:
 
-// Адрес изображения url подставьте как src изображения внутри блока .big-picture__img.
 
-// Количество лайков likes подставьте как текстовое содержание элемента .likes-count.
 
-// Количество показанных комментариев подставьте как текстовое содержание элемента .social__comment-shown-count.
 
-// Общее количество комментариев к фотографии comments подставьте как текстовое содержание элемента .social__comment-total-count.
 
 // Список комментариев под фотографией: комментарии должны вставляться в блок .social__comments. Разметка каждого комментария должна выглядеть так:
 
@@ -68,7 +72,6 @@ picturesContainer.addEventListener('click', openBigPicture);
 
 //         Копировать
 
-// Описание фотографии description вставьте строкой в блок .social__caption.
 
 // После открытия окна спрячьте блоки счётчика комментариев .social__comment-count и загрузки новых комментариев .comments-loader, добавив им класс hidden, с ними мы разберёмся позже, в другом домашнем задании.
 
