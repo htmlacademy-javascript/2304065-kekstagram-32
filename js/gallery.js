@@ -3,6 +3,7 @@ import { renderPosts, picturesContainer } from './thumbnail.js';
 
 renderPosts(photoDesc);
 
+const body = document.querySelector('body');
 const bigPictureContainer = document.querySelector('.big-picture');
 const bigPictureImage = bigPictureContainer.querySelector('img');
 const bigPictureLikesCount = bigPictureContainer.querySelector('.likes-count');
@@ -15,6 +16,7 @@ const commentsLoader = bigPictureContainer.querySelector('.comments-loader');
 
 function openBigPicture(evt) {
   evt.preventDefault();
+  body.classList.add('modal-open');
 
   if (evt.target.closest('.pictures')) {
     bigPictureContainer.classList.remove('hidden');
@@ -31,6 +33,7 @@ function openBigPicture(evt) {
 
 function closeBigPicture () {
   bigPictureContainer.classList.add('hidden');
+  body.classList.remove('modal-open');
   document.removeEventListener('keydown', onDocumentKeydown);
 }
 
