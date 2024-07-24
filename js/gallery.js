@@ -12,6 +12,7 @@ const bigPictureCommentsCountCurrent = bigPictureContainer.querySelector('.socia
 const bigPictureDesc = bigPictureContainer.querySelector('.social__caption');
 const bigPictureContainerClose = bigPictureContainer.querySelector('#picture-cancel');
 const commentsLoader = bigPictureContainer.querySelector('.comments-loader');
+const commentsList = bigPictureContainer.querySelector('.social__comments');
 
 
 function openBigPicture(evt) {
@@ -28,6 +29,8 @@ function openBigPicture(evt) {
     bigPictureDesc.textContent = evt.target.alt;
     bigPictureCommentsCountCurrent.classList.add('hidden');
     commentsLoader.classList.add('hidden');
+
+    renderComments ();
   }
 }
 
@@ -52,19 +55,14 @@ function onDocumentKeydown (evt) {
   }
 }
 
+function renderComments(comments) {
+  commentsList.innerHTML = '';
+}
+
 picturesContainer.addEventListener('click', openBigPicture);
 
 // Задача
 // Реализовать сценарий просмотра фотографий в полноразмерном режиме. В таком режиме пользователь получает несколько дополнительных возможностей: детально рассмотреть изображение, поставить «лайк», почитать комментарии, оставленные другими пользователями.
-
-
-
-// Окно должно открываться при клике на миниатюру. Данные для окна (изображение, комментарии, лайки и так далее) берите из того же объекта, который использовался для отрисовки соответствующей миниатюры.
-
-
-
-
-
 
 // Список комментариев под фотографией: комментарии должны вставляться в блок .social__comments. Разметка каждого комментария должна выглядеть так:
 
@@ -78,12 +76,5 @@ picturesContainer.addEventListener('click', openBigPicture);
 // </li>
 
 //         Копировать
-
-
-// После открытия окна спрячьте блоки счётчика комментариев .social__comment-count и загрузки новых комментариев .comments-loader, добавив им класс hidden, с ними мы разберёмся позже, в другом домашнем задании.
-
-// После открытия окна добавьте тегу <body> класс modal-open, чтобы контейнер с фотографиями позади не прокручивался при скролле. При закрытии окна не забудьте удалить этот класс.
-
-// Напишите код для закрытия окна по нажатию клавиши Esc и клике по иконке закрытия.
 
 // Подключите модуль в проект.
