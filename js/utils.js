@@ -21,4 +21,23 @@ function createUniqNumber (min, max) {
   };
 }
 
+// function createUniqNumber(min, max) {
+//   const previousNumbs = [];
+//   const totalNumbers = max - min + 1;
+
+//   return function () {
+//     if (previousNumbs.length >= totalNumbers) {
+//       return;
+//     }
+
+//     let currentNum;
+//     do {
+//       currentNum = getRandomInteger(min, max);
+//     } while (previousNumbs.includes(currentNum));
+
+//     previousNumbs.push(currentNum);
+//     return currentNum;
+//   };
+// }
+
 export { createUniqNumber, getRandomInteger};

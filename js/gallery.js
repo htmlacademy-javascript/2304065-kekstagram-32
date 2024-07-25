@@ -2,6 +2,7 @@ import { photoDesc } from './data.js';
 import { renderPosts, picturesContainer } from './thumbnail.js';
 
 renderPosts(photoDesc);
+console.log(photoDesc);
 
 const body = document.querySelector('body');
 const bigPictureContainer = document.querySelector('.big-picture');
@@ -17,21 +18,26 @@ const commentTemplate = document.querySelector('#comment').content.querySelector
 
 function openBigPicture(evt) {
   evt.preventDefault();
-  body.classList.add('modal-open');
 
-  if (evt.target.closest('.pictures')) {
+  if (evt.target.closest('.picture')) {
+    body.classList.add('modal-open');
     bigPictureContainer.classList.remove('hidden');
     document.addEventListener('keydown', onDocumentKeydown);
-    bigPictureImage.src = evt.target.src;
-    bigPictureImage.alt = evt.target.alt;
-    bigPictureLikesCount.textContent = evt.target.parentNode.querySelector('.picture__likes').textContent;
-    bigPictureCommentsCountTotal.textContent = evt.target.parentNode.querySelector('.picture__comments').textContent;
-    bigPictureDesc.textContent = evt.target.alt;
-    bigPictureCommentsCountCurrent.classList.add('hidden');
-    commentsLoader.classList.add('hidden');
+    renderBigPicture(evt);
 
-    renderComments(photoDesc);
+    // createNewComment();
+    renderComments();
   }
+}
+
+function renderBigPicture (evt) {
+  bigPictureImage.src = evt.target.src;
+  bigPictureImage.alt = evt.target.alt;
+  bigPictureLikesCount.textContent = evt.target.parentNode.querySelector('.picture__likes').textContent;
+  bigPictureCommentsCountTotal.textContent = evt.target.parentNode.querySelector('.picture__comments').textContent;
+  bigPictureDesc.textContent = evt.target.alt;
+  bigPictureCommentsCountCurrent.classList.add('hidden');
+  commentsLoader.classList.add('hidden');
 }
 
 function closeBigPicture () {
@@ -55,7 +61,7 @@ function onDocumentKeydown (evt) {
   }
 }
 
-function createComment ({avatar, name, message}) {
+function createNewComment ({avatar, name, message}) {
   const comment = commentTemplate.cloneNode(true);
 
   comment.querySelector('.social__picture').src = avatar;
@@ -65,11 +71,11 @@ function createComment ({avatar, name, message}) {
   return comment;
 }
 
-function renderComments(comments) {
+function renderComments(comment) {
   commentsList.innerHTML = '';
   const commentFragment = document.createDocumentFragment();
-  comments.forEach((item) => {
-    const comment = createComment(item);
+  comment.forEach((item) => {
+    const comment = createNewComment(item);
     commentFragment.appendChild(comment);
   });
 
