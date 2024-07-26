@@ -23,6 +23,6 @@ function createUniqNumber (min, max) {
 
 function isEscapeEvt (evt) {
   return evt.key === 'Escape';
-};
+}
 
 export { createUniqNumber, getRandomInteger, isEscapeEvt};
