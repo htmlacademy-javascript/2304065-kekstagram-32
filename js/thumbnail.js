@@ -1,8 +1,12 @@
+import { photoDesc } from './data.js';
+import { openBigPicture } from './gallery.js';
+
 const pictureTemplate = document.querySelector('#picture').content.querySelector('.picture');
 const picturesContainer = document.querySelector('.pictures');
-const fragment = document.createDocumentFragment();
 
 function renderPosts(posts) {
+  const fragment = document.createDocumentFragment();
+
   posts.forEach((item) => {
     const pictureElement = pictureTemplate.cloneNode(true);
     pictureElement.querySelector('.picture__img').src = item.url;
@@ -15,5 +19,18 @@ function renderPosts(posts) {
 
   picturesContainer.appendChild(fragment);
 }
+
+picturesContainer.addEventListener('click', (evt) => {
+  const thumbnailElement = evt.target.closest('.picture');
+  if (!thumbnailElement) {
+    return;
+  }
+
+  const data = photoDesc.find((item) => item.id === +thumbnailElement.dataset.postId);
+
+  if (data) {
+    openBigPicture(data);
+  }
+});
 
 export { renderPosts, picturesContainer };

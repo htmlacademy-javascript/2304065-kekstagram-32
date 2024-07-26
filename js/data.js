@@ -63,12 +63,10 @@ function createComment() {
   const randomNickname = getRandomInteger(0, NICKNAME_COMMENT.length - 1);
 
   return {
-    comment: {
-      id: randomIdComments(),
-      avatar: `img/avatar-${randomAvatar}.svg`,
-      message: MESSAGE_COMMENT[randomCommentsMessage],
-      name: NICKNAME_COMMENT[randomNickname]
-    }
+    id: randomIdComments(),
+    avatar: `img/avatar-${randomAvatar}.svg`,
+    message: MESSAGE_COMMENT[randomCommentsMessage],
+    name: NICKNAME_COMMENT[randomNickname]
   };
 }
 
