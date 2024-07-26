@@ -35,7 +35,7 @@ function openBigPicture ({url, likes, description, comment}) {
   bigPictureLikesCount.textContent = likes;
   bigPictureCommentsCountTotal.textContent = comment.length;
   bigPictureDesc.textContent = description;
-  // bigPictureCommentsCountCurrent.classList.add('hidden');
+  bigPictureCommentsCountCurrent.classList.add('hidden');
 
   commentsLoader.classList.add('hidden');
 
