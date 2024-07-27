@@ -60,32 +60,6 @@ function closeBigPicture() {
   commentShown = 0;
 }
 
-// function renderComments(comments) {
-//   clearComments();
-
-//   commentShown += COMMENT_STEP;
-
-//   if (commentShown >= comments.length) {
-//     commentsLoader.classList.add('hidden');
-//     commentShown = commentShownList.length;
-//   } else {
-//     commentsLoader.classList.remove('hidden');
-//   }
-
-//   const fragment = document.createDocumentFragment();
-
-//   comments.forEach((comment) => {
-//     const commentElement = commentTemplate.cloneNode(true);
-//     commentElement.querySelector('.social__picture').src = comment.avatar;
-//     commentElement.querySelector('.social__picture').alt = comment.name;
-//     commentElement.querySelector('.social__text').textContent = comment.message;
-//     fragment.appendChild(commentElement);
-//   });
-
-
-//   commentsList.appendChild(fragment);
-// }
-
 function createComment({avatar, name, message}) {
 
   const comment = commentTemplate.cloneNode(true);
@@ -99,7 +73,20 @@ function createComment({avatar, name, message}) {
 function renderComments(comments) {
   clearComments();
 
+  commentShown += COMMENT_STEP;
+
   const fragment = document.createDocumentFragment();
+
+  if (commentShown >= commentShownList.length) {
+    commentsLoader.classList.add('hidden');
+    commentShown = commentShownList.length;
+  } else {
+    commentsLoader.classList.remove('hidden');
+  }
+
+  // for (let i = 0; i < commentShown ; i++) {
+
+  // }
 
   comments.forEach((comment) => {
     const commentRender = createComment(comment);
@@ -108,6 +95,19 @@ function renderComments(comments) {
 
   commentsList.appendChild(fragment);
 }
+
+// function renderComments(comments) {
+//   clearComments();
+
+//   const fragment = document.createDocumentFragment();
+
+//   comments.forEach((comment) => {
+//     const commentRender = createComment(comment);
+//     fragment.appendChild(commentRender);
+//   });
+
+//   commentsList.appendChild(fragment);
+// }
 
 // function renderComments(comments) {
 //   clearComments();
