@@ -2,14 +2,13 @@ import { isEscapeEvt } from './utils.js';
 
 const COMMENT_STEP = 5;
 let commentShown = 0;
-let commentShownList = [];
 
 const body = document.querySelector('body');
 const bigPictureContainer = document.querySelector('.big-picture');
 const bigPictureImage = bigPictureContainer.querySelector('img');
 const bigPictureLikesCount = bigPictureContainer.querySelector('.likes-count');
 const bigPictureCommentsCountTotal = bigPictureContainer.querySelector('.social__comment-total-count');
-const bigPictureCommentsCountCurrent = bigPictureContainer.querySelector('.social__comment-count');
+const bigPictureCommentsCountCurrent = bigPictureContainer.querySelector('.social__comment-shown-count');
 const bigPictureDesc = bigPictureContainer.querySelector('.social__caption');
 const bigPictureContainerClose = bigPictureContainer.querySelector('#picture-cancel');
 const commentsLoader = bigPictureContainer.querySelector('.comments-loader');
@@ -17,11 +16,11 @@ const commentsList = bigPictureContainer.querySelector('.social__comments');
 const commentTemplate = document.querySelector('#comment').content.querySelector('.social__comment');
 
 bigPictureContainerClose.addEventListener('click', closeBigPicture);
-// commentsLoader.addEventListener('click', onCommentsLoaderClick);
+commentsLoader.addEventListener('click', onCommentsLoaderClick);
 
-// function onCommentsLoaderClick() {
-//   renderComments();
-// }
+function onCommentsLoaderClick() {
+  renderComments();
+}
 
 
 function onDocumentKeydown (evt) {
@@ -45,10 +44,6 @@ function openBigPicture ({url, likes, description, comment}) {
   bigPictureLikesCount.textContent = likes;
   bigPictureCommentsCountTotal.textContent = comment.length;
   bigPictureDesc.textContent = description;
-  // bigPictureCommentsCountCurrent.classList.add('hidden');
-
-  // commentsLoader.classList.add('hidden');
-
 
   renderComments(comment);
 }
@@ -89,26 +84,12 @@ function renderComments(comment) {
     fragment.appendChild(commentRender);
   }
 
-  // comments.forEach((comment) => {
-  //   const commentRender = createComment(comment);
-  //   fragment.appendChild(commentRender);
-  // });
+  bigPictureCommentsCountCurrent.textContent = commentShown;
+  bigPictureCommentsCountTotal.textContent = comment.length;
+
 
   commentsList.appendChild(fragment);
 }
-
-// function renderComments(comments) {
-//   clearComments();
-
-//   const fragment = document.createDocumentFragment();
-
-//   comments.forEach((comment) => {
-//     const commentRender = createComment(comment);
-//     fragment.appendChild(commentRender);
-//   });
-
-//   commentsList.appendChild(fragment);
-// }
 
 // function renderComments(comments) {
 //   clearComments();
