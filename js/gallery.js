@@ -70,28 +70,29 @@ function createComment({avatar, name, message}) {
   return comment;
 }
 
-function renderComments(comments) {
+function renderComments(comment) {
   clearComments();
 
   commentShown += COMMENT_STEP;
 
   const fragment = document.createDocumentFragment();
 
-  if (commentShown >= commentShownList.length) {
+  if (commentShown >= comment.length) {
     commentsLoader.classList.add('hidden');
-    commentShown = commentShownList.length;
+    commentShown = comment.length;
   } else {
     commentsLoader.classList.remove('hidden');
   }
 
-  // for (let i = 0; i < commentShown ; i++) {
-
-  // }
-
-  comments.forEach((comment) => {
-    const commentRender = createComment(comment);
+  for (let i = 0; i < commentShown; i++) {
+    const commentRender = createComment(comment[i]);
     fragment.appendChild(commentRender);
-  });
+  }
+
+  // comments.forEach((comment) => {
+  //   const commentRender = createComment(comment);
+  //   fragment.appendChild(commentRender);
+  // });
 
   commentsList.appendChild(fragment);
 }
