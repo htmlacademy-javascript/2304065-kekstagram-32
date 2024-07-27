@@ -1,5 +1,6 @@
 import { isEscapeEvt } from './utils.js';
 
+const COMMENT_STEP = 5;
 const body = document.querySelector('body');
 const bigPictureContainer = document.querySelector('.big-picture');
 const bigPictureImage = bigPictureContainer.querySelector('img');
@@ -35,7 +36,7 @@ function openBigPicture ({url, likes, description, comment}) {
   bigPictureLikesCount.textContent = likes;
   bigPictureCommentsCountTotal.textContent = comment.length;
   bigPictureDesc.textContent = description;
-  bigPictureCommentsCountCurrent.classList.add('hidden');
+  // bigPictureCommentsCountCurrent.classList.add('hidden');
 
   commentsLoader.classList.add('hidden');
 
