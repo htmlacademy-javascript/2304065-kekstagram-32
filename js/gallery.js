@@ -2,6 +2,7 @@ import { isEscapeEvt } from './utils.js';
 
 const COMMENT_STEP = 5;
 let commentShown = 0;
+let commentArray = [];
 
 const body = document.querySelector('body');
 const bigPictureContainer = document.querySelector('.big-picture');
@@ -19,7 +20,7 @@ bigPictureContainerClose.addEventListener('click', closeBigPicture);
 commentsLoader.addEventListener('click', onCommentsLoaderClick);
 
 function onCommentsLoaderClick() {
-  renderComments();
+  renderComments(commentArray);
 }
 
 
@@ -45,6 +46,7 @@ function openBigPicture ({url, likes, description, comment}) {
   bigPictureCommentsCountTotal.textContent = comment.length;
   bigPictureDesc.textContent = description;
 
+  commentArray = {url, likes, description, comment}.comment;
   renderComments(comment);
 }
 
@@ -87,24 +89,7 @@ function renderComments(comment) {
   bigPictureCommentsCountCurrent.textContent = commentShown;
   bigPictureCommentsCountTotal.textContent = comment.length;
 
-
   commentsList.appendChild(fragment);
 }
-
-// function renderComments(comments) {
-//   clearComments();
-
-//   const fragment = document.createDocumentFragment();
-
-//   comments.forEach((comment) => {
-//     const commentElement = commentTemplate.cloneNode(true);
-//     commentElement.querySelector('.social__picture').src = comment.avatar;
-//     commentElement.querySelector('.social__picture').alt = comment.name;
-//     commentElement.querySelector('.social__text').textContent = comment.message;
-//     fragment.appendChild(commentElement);
-//   });
-
-//   commentsList.appendChild(fragment);
-// }
 
 export {openBigPicture};
