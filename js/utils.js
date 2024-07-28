@@ -21,4 +21,8 @@ function createUniqNumber (min, max) {
   };
 }
 
-export { createUniqNumber, getRandomInteger};
+function isEscapeEvt (evt) {
+  return evt.key === 'Escape';
+}
+
+export { createUniqNumber, getRandomInteger, isEscapeEvt};
