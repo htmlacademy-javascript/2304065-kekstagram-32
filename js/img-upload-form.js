@@ -13,6 +13,7 @@ const imgUploadForm = document.querySelector('.img-upload__form');
 const imgUploadInput = imgUploadForm.querySelector('.img-upload__input');
 const imgUploadOverlay = imgUploadForm.querySelector('.img-upload__overlay');
 const imgUploadCancel = imgUploadForm.querySelector('.img-upload__cancel');
+const hashtag = imgUploadForm.querySelector('.text__hashtags');
 const imgComment = imgUploadForm.querySelector('.text__description');
 const imgUploadFormSubmit = imgUploadForm.querySelector('.img-upload__submit');
 
@@ -60,9 +61,25 @@ function validateComment(comment) {
   return comment.length <= 140;
 }
 
-pristine.addValidator(imgComment,
+pristine.addValidator(
+  imgComment,
   validateComment,
   'Комментарий не должен быть больше 140 символов'
 );
 
+function normalizeHashtag(string) {
+  return string.trim().split(' ').filter((tag) => Boolean(tag.length));
+}
+
+function hasValidCount(value) {
+  return normalizeHashtag(value).length <= MAX_HAHTAG_COUNT;
+}
+
+pristine.addValidator(
+  hashtag,
+  hasValidCount,
+  ERROR_TEXT.INVALID_COUNT,
+  3,
+  true
+);
 
