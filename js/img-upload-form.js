@@ -1,5 +1,13 @@
 import { isEscapeEvt } from './utils.js';
 
+const MAX_HAHTAG_COUNT = 5;
+const VALID_HASHTAG = /^#[a-zа-яё0-9]{1,19}$/i;
+const ERROR_TEXT = {
+  INVALID_HASHTAG: 'Неправильный хэштег',
+  NOT_UNIQUE: 'Хэштег уже существует',
+  INVALID_COUNT: `Максимум ${MAX_HAHTAG_COUNT} хэштегов`
+};
+
 const body = document.querySelector('body');
 const imgUploadForm = document.querySelector('.img-upload__form');
 const imgUploadInput = imgUploadForm.querySelector('.img-upload__input');
@@ -14,7 +22,6 @@ const pristine = new Pristine(imgUploadForm, {
   errorTextClass: 'img-upload__field-wrapper--error'
 });
 
-const validHashtag = /^#[a-zа-яё0-9]{1, 19}$/i;
 
 function onDocumentKeydown (evt) {
   if (isEscapeEvt(evt)) {
