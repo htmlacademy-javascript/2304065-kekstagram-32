@@ -75,11 +75,24 @@ function hasValidCount(value) {
   return normalizeHashtag(value).length <= MAX_HAHTAG_COUNT;
 }
 
+function hasUniq(value) {
+  const lowerCaseTag = normalizeHashtag(value).map((tag) => tag.toLowerCase());
+  return lowerCaseTag.length === new Set(lowerCaseTag).size;
+}
+
 pristine.addValidator(
   hashtag,
   hasValidCount,
   ERROR_TEXT.INVALID_COUNT,
   3,
+  true
+);
+
+pristine.addValidator(
+  hashtag,
+  hasUniq,
+  ERROR_TEXT.NOT_UNIQUE,
+  1,
   true
 );
 
