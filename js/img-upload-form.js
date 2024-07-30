@@ -47,7 +47,7 @@ function closeModal() {
 
 imgUploadInput.addEventListener('change', onImgUploadEditing);
 imgUploadCancel.addEventListener('click', closeModal);
-imgUploadFormSubmit.addEventListener('submit', onSubmitClick);
+imgUploadForm.addEventListener('submit', onSubmitClick);
 
 function validateComment(comment) {
   return comment.length <= 140;
