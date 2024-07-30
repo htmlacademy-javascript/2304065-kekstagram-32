@@ -7,12 +7,14 @@ const imgUploadOverlay = imgUploadForm.querySelector('.img-upload__overlay');
 const imgUploadCancel = imgUploadForm.querySelector('.img-upload__cancel');
 
 const pristine = new Pristine(imgUploadForm);
+const validHashtag = /^#[a-zа-яё0-9]{1, 19}/i;
 
 imgUploadForm.addEventListener('submit', function(evt) {
   evt.preventDefault();
   const isValid = pristine.validate();
 
   if (isValid) {
+
     console.log('Можно отправить');
   } else {
     console.log('Нетъ');
@@ -41,6 +43,7 @@ function closeModal() {
   imgUploadOverlay.classList.add('hidden');
   document.removeEventListener('keydown', onDocumentKeydown);
   imgUploadForm.reset();
+  pristine.reset();
 }
 
 imgUploadInput.addEventListener('change', onImgUploadEditing);
