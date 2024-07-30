@@ -13,7 +13,7 @@ const imgUploadForm = document.querySelector('.img-upload__form');
 const imgUploadInput = imgUploadForm.querySelector('.img-upload__input');
 const imgUploadOverlay = imgUploadForm.querySelector('.img-upload__overlay');
 const imgUploadCancel = imgUploadForm.querySelector('.img-upload__cancel');
-const hashtag = imgUploadForm.querySelector('.text__hashtags');
+const imgHashtag = imgUploadForm.querySelector('.text__hashtags');
 const imgComment = imgUploadForm.querySelector('.text__description');
 
 const pristine = new Pristine(imgUploadForm, {
@@ -23,10 +23,16 @@ const pristine = new Pristine(imgUploadForm, {
 });
 
 
-function onDocumentKeydown (evt) {
+function onDocumentKeydown(evt) {
   if (isEscapeEvt(evt)) {
     evt.preventDefault();
     closeModal();
+  }
+}
+
+function cancelEscape(evt) {
+  if (isEscapeEvt(evt)) {
+    evt.stopPropagation();
   }
 }
 
@@ -42,6 +48,8 @@ function showModal() {
   body.classList.add('modal-open');
   imgUploadOverlay.classList.remove('hidden');
   document.addEventListener('keydown', onDocumentKeydown);
+  imgHashtag.addEventListener('keydown', cancelEscape);
+  imgComment.addEventListener('keydown', cancelEscape);
 }
 
 function closeModal() {
@@ -84,7 +92,7 @@ function hasUniq(value) {
 }
 
 pristine.addValidator(
-  hashtag,
+  imgHashtag,
   hasValidCount,
   ERROR_TEXT.INVALID_COUNT,
   3,
@@ -92,7 +100,7 @@ pristine.addValidator(
 );
 
 pristine.addValidator(
-  hashtag,
+  imgHashtag,
   hasValid,
   ERROR_TEXT.INVALID_HASHTAG,
   2,
@@ -100,7 +108,7 @@ pristine.addValidator(
 );
 
 pristine.addValidator(
-  hashtag,
+  imgHashtag,
   hasUniq,
   ERROR_TEXT.NOT_UNIQUE,
   1,
