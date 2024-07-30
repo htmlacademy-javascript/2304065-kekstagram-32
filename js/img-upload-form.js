@@ -15,7 +15,6 @@ const imgUploadOverlay = imgUploadForm.querySelector('.img-upload__overlay');
 const imgUploadCancel = imgUploadForm.querySelector('.img-upload__cancel');
 const hashtag = imgUploadForm.querySelector('.text__hashtags');
 const imgComment = imgUploadForm.querySelector('.text__description');
-const imgUploadFormSubmit = imgUploadForm.querySelector('.img-upload__submit');
 
 const pristine = new Pristine(imgUploadForm, {
   classTo: 'img-upload__field-wrapper',
@@ -75,6 +74,10 @@ function hasValidCount(value) {
   return normalizeHashtag(value).length <= MAX_HAHTAG_COUNT;
 }
 
+function hasValid(value) {
+  return normalizeHashtag(value).every((tag) => VALID_HASHTAG.test(tag));
+}
+
 function hasUniq(value) {
   const lowerCaseTag = normalizeHashtag(value).map((tag) => tag.toLowerCase());
   return lowerCaseTag.length === new Set(lowerCaseTag).size;
@@ -85,6 +88,14 @@ pristine.addValidator(
   hasValidCount,
   ERROR_TEXT.INVALID_COUNT,
   3,
+  true
+);
+
+pristine.addValidator(
+  hashtag,
+  hasValid,
+  ERROR_TEXT.INVALID_HASHTAG,
+  2,
   true
 );
 
