@@ -5,7 +5,8 @@ const imgUploadForm = document.querySelector('.img-upload__form');
 const imgUploadInput = imgUploadForm.querySelector('.img-upload__input');
 const imgUploadOverlay = imgUploadForm.querySelector('.img-upload__overlay');
 const imgUploadCancel = imgUploadForm.querySelector('.img-upload__cancel');
-const imgComment = imgUploadForm.querySelector('.text__description')
+const imgComment = imgUploadForm.querySelector('.text__description');
+const imgUploadFormSubmit = imgUploadForm.querySelector('.img-upload__submit');
 
 const pristine = new Pristine(imgUploadForm, {
   classTo: 'img-upload__field-wrapper',
@@ -14,15 +15,6 @@ const pristine = new Pristine(imgUploadForm, {
 });
 
 const validHashtag = /^#[a-zа-яё0-9]{1, 19}$/i;
-
-function validateComment(comment) {
-  return comment.length <= 140;
-}
-
-pristine.addValidator(imgComment,
-  validateComment,
-  'Комментарий не должен быть больше 140 символов'
-);
 
 function onDocumentKeydown (evt) {
   if (isEscapeEvt(evt)) {
@@ -33,6 +25,10 @@ function onDocumentKeydown (evt) {
 
 function onImgUploadEditing() {
   showModal();
+}
+
+function onSubmitClick(evt) {
+  evt.preventDefault();
 }
 
 function showModal() {
@@ -51,4 +47,15 @@ function closeModal() {
 
 imgUploadInput.addEventListener('change', onImgUploadEditing);
 imgUploadCancel.addEventListener('click', closeModal);
+imgUploadFormSubmit.addEventListener('submit', onSubmitClick);
+
+function validateComment(comment) {
+  return comment.length <= 140;
+}
+
+pristine.addValidator(imgComment,
+  validateComment,
+  'Комментарий не должен быть больше 140 символов'
+);
+
 
