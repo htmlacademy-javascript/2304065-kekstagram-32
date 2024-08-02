@@ -22,7 +22,6 @@ const pristine = new Pristine(imgUploadForm, {
   errorTextClass: 'img-upload__field-wrapper--error'
 });
 
-
 function onDocumentKeydown(evt) {
   if (isEscapeEvt(evt)) {
     evt.preventDefault();
