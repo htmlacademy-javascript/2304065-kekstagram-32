@@ -88,11 +88,11 @@ function setImgStyle() {
 }
 
 function showSlider() {
-  sliderContainerElement.classList.remove('.hidden');
+  sliderContainerElement.classList.remove('hidden');
 }
 
 function hideSlider() {
-  sliderContainerElement.classList.add('.hidden');
+  sliderContainerElement.classList.add('hidden');
 }
 
 function onSliderUpdate() {

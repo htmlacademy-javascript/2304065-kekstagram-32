@@ -51,7 +51,6 @@ function showModal() {
   document.addEventListener('keydown', onDocumentKeydown);
   hashtagInput.addEventListener('keydown', cancelEscape);
   imgComment.addEventListener('keydown', cancelEscape);
-  initSlider();
 }
 
 function closeModal() {
@@ -109,3 +108,4 @@ pristine.addValidator(
   true
 );
 
+initSlider();
