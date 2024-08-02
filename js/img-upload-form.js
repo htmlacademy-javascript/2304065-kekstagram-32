@@ -1,11 +1,11 @@
 import { isEscapeEvt } from './utils.js';
 
-const MAX_HAHTAG_COUNT = 5;
+const MAX_HASHTAG_COUNT = 5;
 const VALID_HASHTAG = /^#[a-zа-яё0-9]{1,19}$/i;
 const ERROR_TEXT = {
   INVALID_HASHTAG: 'Неправильный хэштег',
   NOT_UNIQUE: 'Хэштег уже существует',
-  INVALID_COUNT: `Максимум ${MAX_HAHTAG_COUNT} хэштегов`
+  INVALID_COUNT: `Максимум ${MAX_HASHTAG_COUNT} хэштегов`
 };
 
 const body = document.querySelector('body');
@@ -69,7 +69,7 @@ function normalizeHashtag(string) {
 }
 
 function hasValidCount(value) {
-  return normalizeHashtag(value).length <= MAX_HAHTAG_COUNT;
+  return normalizeHashtag(value).length <= MAX_HASHTAG_COUNT;
 }
 
 function hasValid(value) {
