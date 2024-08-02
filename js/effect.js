@@ -1,3 +1,12 @@
+const Effect = {
+  DEFAULT: 'none',
+  CHROME: 'chrome',
+  SEPIA: 'sepia',
+  MARVIN: 'marvin',
+  PHOBOS: 'phobos',
+  HEAT: 'heat',
+};
+
 
 
 const imgUploadForm = document.querySelector('.img-upload__form');
