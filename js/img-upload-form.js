@@ -1,4 +1,5 @@
 import { isEscapeEvt } from './utils.js';
+import { resetScale } from './scale.js';
 
 const MAX_HASHTAG_COUNT = 5;
 const VALID_HASHTAG = /^#[a-zа-яё0-9]{1,19}$/i;
@@ -57,6 +58,7 @@ function closeModal() {
   document.removeEventListener('keydown', onDocumentKeydown);
   imgUploadForm.reset();
   pristine.reset();
+  resetScale();
 }
 
 imgUploadInput.addEventListener('change', onImgUploadEditing);
