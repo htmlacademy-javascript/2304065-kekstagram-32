@@ -30,11 +30,45 @@ const effectToFilter = {
   }
 };
 
+const effectToSliderOptions = {
+  [Effect.DEFAULT]: {
+    min: 0,
+    max: 100,
+    step: 1,
+  },
+  [Effect.CHROME]: {
+    min: 0,
+    max: 1,
+    step: 0.1,
+  },
+  [Effect.SEPIA]: {
+    min: 0,
+    max: 1,
+    step: 0.1,
+  },
+  [Effect.MARVIN]: {
+    min: 0,
+    max: 100,
+    step: 1
+  },
+  [Effect.PHOBOS]: {
+    min: 0,
+    max: 3,
+    step: 0.1,
+  },
+  [Effect.HEAT]: {
+    min: 1,
+    max: 3,
+    step: 0.1,
+  }
+};
+
 const imgUploadForm = document.querySelector('.img-upload__form');
 const sliderElement = imgUploadForm.querySelector('.effect-level__slider');
 const sliderContainerElement = imgUploadForm.querySelector('.img-upload__effect-level');
 const effectLevelElement = imgUploadForm.querySelector('.effect-level__value');
 const imgElement = imgUploadForm.querySelector('.img-upload__preview img');
+const effectsElement = imgUploadForm.querySelector('.img-upload__effects');
 
 let chosenEffect = Effect.DEFAULT;
 
@@ -86,4 +120,40 @@ function createSlider({min, max, step}) {
   hideSlider();
 }
 
+function updateSlider({min, max, step}) {
+  sliderElement.noUiSlider.updateOptions({
+    range: {min, max},
+    start: max,
+    step,
+  });
+}
 
+function setSlider() {
+  if(isDefault()) {
+    hideSlider();
+  } else {
+    updateSlider(effectToSliderOptions[chosenEffect]);
+    showSlider();
+  }
+}
+
+function setEffect(effect) {
+  chosenEffect = effect;
+  setSlider();
+  setImgStyle();
+}
+
+function resetSlider() {
+  setEffect(Effect.DEFAULT);
+}
+
+function onEffectChange(evt) {
+  setEffect(evt.target.value);
+}
+
+function initSlider() {
+  createSlider(effectToSliderOptions[chosenEffect]);
+  effectsElement.addEventListener('change', onEffectChange);
+}
+
+export {initSlider, resetSlider};

@@ -1,5 +1,6 @@
 import { isEscapeEvt } from './utils.js';
 import { resetScale } from './scale.js';
+import { initSlider, resetSlider } from './effect.js';
 
 const MAX_HASHTAG_COUNT = 5;
 const VALID_HASHTAG = /^#[a-zа-яё0-9]{1,19}$/i;
@@ -50,6 +51,7 @@ function showModal() {
   document.addEventListener('keydown', onDocumentKeydown);
   hashtagInput.addEventListener('keydown', cancelEscape);
   imgComment.addEventListener('keydown', cancelEscape);
+  initSlider();
 }
 
 function closeModal() {
@@ -59,6 +61,7 @@ function closeModal() {
   imgUploadForm.reset();
   pristine.reset();
   resetScale();
+  resetSlider();
 }
 
 imgUploadInput.addEventListener('change', onImgUploadEditing);
