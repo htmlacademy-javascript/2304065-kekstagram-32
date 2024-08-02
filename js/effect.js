@@ -7,7 +7,28 @@ const Effect = {
   HEAT: 'heat',
 };
 
-
+const effectToFilter = {
+  [Effect.CHROME]: {
+    style: 'grayscale',
+    unit: '',
+  },
+  [Effect.SEPIA]: {
+    style: 'sepia',
+    unit: '',
+  },
+  [Effect.MARVIN]: {
+    style: 'invert',
+    unit: '%',
+  },
+  [Effect.PHOBOS]: {
+    style: 'blur',
+    unit: 'px',
+  },
+  [Effect.HEAT]: {
+    style: 'brightness',
+    unit: '',
+  }
+};
 
 const imgUploadForm = document.querySelector('.img-upload__form');
 const sliderElement = imgUploadForm.querySelector('.effect-level__slider');
