@@ -64,16 +64,6 @@ imgUploadInput.addEventListener('change', onImgUploadEditing);
 imgUploadCancel.addEventListener('click', closeModal);
 imgUploadForm.addEventListener('submit', onSubmitClick);
 
-function validateComment(comment) {
-  return comment.length <= 140;
-}
-
-pristine.addValidator(
-  imgComment,
-  validateComment,
-  'Комментарий не должен быть больше 140 символов'
-);
-
 function normalizeHashtag(string) {
   return string.trim().split(' ').filter((tag) => Boolean(tag.length));
 }
