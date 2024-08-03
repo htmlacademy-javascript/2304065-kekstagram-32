@@ -84,7 +84,7 @@ function setImgStyle() {
 
   const {value} = effectLevelElement;
   const {style, unit} = effectToFilter[chosenEffect];
-  imgElement.style.filter = `${style}(${value} ${unit})`;
+  imgElement.style.filter = `${style}(${value}${unit})`;
 }
 
 function showSlider() {
