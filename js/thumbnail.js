@@ -1,5 +1,6 @@
 import { photoDesc } from './data.js';
 import { openBigPicture } from './gallery.js';
+import { photosArray } from './api.js';
 
 const pictureTemplate = document.querySelector('#picture').content.querySelector('.picture');
 const picturesContainer = document.querySelector('.pictures');
@@ -26,7 +27,7 @@ picturesContainer.addEventListener('click', (evt) => {
     return;
   }
 
-  const data = photoDesc.find((item) => item.id === +thumbnailElement.dataset.postId);
+  const data = photosArray.find((item) => item.id === +thumbnailElement.dataset.postId);
 
   if (data) {
     openBigPicture(data);

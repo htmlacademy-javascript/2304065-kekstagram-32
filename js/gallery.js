@@ -1,5 +1,6 @@
 import { isEscapeEvt } from './utils.js';
 
+
 const COMMENT_STEP = 5;
 let commentShown = 0;
 let commentArray = [];
@@ -35,7 +36,7 @@ function clearComments() {
   commentsList.querySelectorAll('.social__comment').forEach((item) => item.remove());
 }
 
-function openBigPicture ({url, likes, description, comment}) {
+function openBigPicture ({url, likes, description, comments}) {
   bigPictureContainer.classList.remove('hidden');
   body.classList.add('modal-open');
   document.addEventListener('keydown', onDocumentKeydown);
@@ -43,11 +44,11 @@ function openBigPicture ({url, likes, description, comment}) {
   bigPictureImage.src = url;
   bigPictureImage.alt = description;
   bigPictureLikesCount.textContent = likes;
-  bigPictureCommentsCountTotal.textContent = comment.length;
+  bigPictureCommentsCountTotal.textContent = comments.length;
   bigPictureDesc.textContent = description;
 
-  commentArray = {url, likes, description, comment}.comment;
-  renderComments(comment);
+  commentArray = {url, likes, description, comments}.comments;
+  renderComments(comments);
 }
 
 function closeBigPicture() {
