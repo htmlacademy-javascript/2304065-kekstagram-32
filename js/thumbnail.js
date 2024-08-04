@@ -1,4 +1,3 @@
-import { photoDesc } from './data.js';
 import { openBigPicture } from './gallery.js';
 import { photosArray } from './api.js';
 
