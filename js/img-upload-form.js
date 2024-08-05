@@ -43,6 +43,18 @@ function onImgUploadEditing() {
 
 function onSubmitClick(evt) {
   evt.preventDefault();
+
+  const isValid = pristine.validate();
+  if (isValid) {
+    const formData = new FormData(evt.target);
+    fetch (
+      'https://32.javascript.htmlacademy.pro/kekstagram',
+      {
+        method: 'POST',
+        body: formData
+      }
+    )
+  }
 }
 
 function showModal() {
