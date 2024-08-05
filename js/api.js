@@ -10,18 +10,17 @@ function getData() {
       if(response.ok) {
         return response.json();
       }
-      throw new Error('Данные не получены :(');
+      throw new Error();
     })
-    .catch((err) => {
+    .then((photos) => {
+      renderPosts(photos);
+      photosArray = photos;
+    })
+    .catch(() => {
       body.appendChild(dataLoadingError);
       setTimeout(() => {
         body.removeChild(dataLoadingError);
       }, 5000);
-    })
-    .then((photos) => {
-      console.log(photos);
-      renderPosts(photos);
-      photosArray = photos;
     })
 }
 
