@@ -56,10 +56,33 @@ function setFormSubmit(onSuccess) {
           body: formData
         }
       )
-      .then(onSuccess);
+      .then((response) => {
+        if(response.ok) {
+          showUploadSuccess();
+        }
+      })
+      .catch(() => {
+        showUploadError();
+      })
     }
   });
 }
+
+// function onSubmitClick(evt) {
+//   evt.preventDefault();
+
+//   const isValid = pristine.validate();
+//   if (isValid) {
+//     const formData = new FormData(evt.target);
+//     fetch (
+//       'https://32.javascript.htmlacademy.pro/kekstagram',
+//       {
+//         method: 'POST',
+//         body: formData
+//       }
+//     )
+//   }
+// }
 
 function showModal() {
   body.classList.add('modal-open');
@@ -81,6 +104,7 @@ function closeModal() {
 
 imgUploadInput.addEventListener('change', onImgUploadEditing);
 imgUploadCancel.addEventListener('click', closeModal);
+// imgUploadForm.addEventListener('submit', onSubmitClick);
 
 function normalizeHashtag(string) {
   return string.trim().split(' ').filter((tag) => Boolean(tag.length));
@@ -125,4 +149,5 @@ pristine.addValidator(
 
 initSlider();
 
+// export {onSubmitClick};
 export {setFormSubmit, closeModal};
