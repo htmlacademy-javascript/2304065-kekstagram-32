@@ -1,6 +1,7 @@
 import { isEscapeEvt } from './utils.js';
 import { resetScale } from './scale.js';
 import { initSlider, resetSlider } from './effect.js';
+import { showUploadError, showUploadSuccess } from './errors.js';
 
 const MAX_HASHTAG_COUNT = 5;
 const VALID_HASHTAG = /^#[a-zа-яё0-9]{1,19}$/i;

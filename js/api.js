@@ -1,7 +1,6 @@
 import { renderPosts } from './thumbnail.js';
 import { showDownloadError } from './errors.js';
 
-
 let photosArray = [];
 
 function getData() {
