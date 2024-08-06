@@ -18,6 +18,7 @@ const imgUploadOverlay = imgUploadForm.querySelector('.img-upload__overlay');
 const imgUploadCancel = imgUploadForm.querySelector('.img-upload__cancel');
 const hashtagInput = imgUploadForm.querySelector('.text__hashtags');
 const imgComment = imgUploadForm.querySelector('.text__description');
+const buttonUploadSubmit = imgUploadForm.querySelector('.img-upload__submit');
 
 const pristine = new Pristine(imgUploadForm, {
   classTo: 'img-upload__field-wrapper',
@@ -42,12 +43,23 @@ function onImgUploadEditing() {
   showModal();
 }
 
+function disabledButtonSubmit() {
+  buttonUploadSubmit.disabled = true;
+  buttonUploadSubmit.textContent = 'Загружаем...';
+}
+
+function enabledButtonSubmit() {
+  buttonUploadSubmit.disabled = false;
+  buttonUploadSubmit.textContent = 'Опубликовать';
+}
+
 function setFormSubmit() {
   imgUploadForm.addEventListener('submit', (evt) => {
     evt.preventDefault();
 
     const isValid = pristine.validate();
     if (isValid) {
+      disabledButtonSubmit();
       const formData = new FormData(evt.target);
       fetch (
         'https://32.javascript.htmlacademy.pro/kekstagram',
@@ -64,25 +76,12 @@ function setFormSubmit() {
       .catch(() => {
         showUploadError();
       })
+      .finally(() => {
+        enabledButtonSubmit();
+      })
     }
   });
 }
-
-// function onSubmitClick(evt) {
-//   evt.preventDefault();
-
-//   const isValid = pristine.validate();
-//   if (isValid) {
-//     const formData = new FormData(evt.target);
-//     fetch (
-//       'https://32.javascript.htmlacademy.pro/kekstagram',
-//       {
-//         method: 'POST',
-//         body: formData
-//       }
-//     )
-//   }
-// }
 
 function showModal() {
   body.classList.add('modal-open');
@@ -104,7 +103,6 @@ function closeModal() {
 
 imgUploadInput.addEventListener('change', onImgUploadEditing);
 imgUploadCancel.addEventListener('click', closeModal);
-// imgUploadForm.addEventListener('submit', onSubmitClick);
 
 function normalizeHashtag(string) {
   return string.trim().split(' ').filter((tag) => Boolean(tag.length));
@@ -149,5 +147,4 @@ pristine.addValidator(
 
 initSlider();
 
-// export {onSubmitClick};
 export {setFormSubmit, closeModal};
