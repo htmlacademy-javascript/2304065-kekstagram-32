@@ -17,7 +17,7 @@ function getData() {
     })
     .catch(() => {
       showDownloadError();
-    })
+    });
 }
 
 export {getData, photosArray};

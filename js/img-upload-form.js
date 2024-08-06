@@ -68,17 +68,17 @@ function setFormSubmit() {
           body: formData
         }
       )
-      .then((response) => {
-        if(response.ok) {
-          showUploadSuccess();
-        }
-      })
-      .catch(() => {
-        showUploadError();
-      })
-      .finally(() => {
-        enabledButtonSubmit();
-      })
+        .then((response) => {
+          if(response.ok) {
+            showUploadSuccess();
+          }
+        })
+        .catch(() => {
+          showUploadError();
+        })
+        .finally(() => {
+          enabledButtonSubmit();
+        });
     }
   });
 }
