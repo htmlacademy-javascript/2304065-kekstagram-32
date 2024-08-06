@@ -42,20 +42,23 @@ function onImgUploadEditing() {
   showModal();
 }
 
-function onSubmitClick(evt) {
-  evt.preventDefault();
+function setFormSubmit(onSuccess) {
+  imgUploadForm.addEventListener('submit', (evt) => {
+    evt.preventDefault();
 
-  const isValid = pristine.validate();
-  if (isValid) {
-    const formData = new FormData(evt.target);
-    fetch (
-      'https://32.javascript.htmlacademy.pro/kekstagram',
-      {
-        method: 'POST',
-        body: formData
-      }
-    )
-  }
+    const isValid = pristine.validate();
+    if (isValid) {
+      const formData = new FormData(evt.target);
+      fetch (
+        'https://32.javascript.htmlacademy.pro/kekstagram',
+        {
+          method: 'POST',
+          body: formData
+        }
+      )
+      .then(onSuccess);
+    }
+  });
 }
 
 function showModal() {
@@ -78,7 +81,6 @@ function closeModal() {
 
 imgUploadInput.addEventListener('change', onImgUploadEditing);
 imgUploadCancel.addEventListener('click', closeModal);
-imgUploadForm.addEventListener('submit', onSubmitClick);
 
 function normalizeHashtag(string) {
   return string.trim().split(' ').filter((tag) => Boolean(tag.length));
@@ -123,4 +125,4 @@ pristine.addValidator(
 
 initSlider();
 
-export {onSubmitClick};
+export {setFormSubmit, closeModal};
