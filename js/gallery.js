@@ -93,4 +93,4 @@ function renderComments(comment) {
   commentsList.appendChild(fragment);
 }
 
-export {openBigPicture};
+export {openBigPicture, closeBigPicture};

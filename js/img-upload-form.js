@@ -121,3 +121,5 @@ pristine.addValidator(
 );
 
 initSlider();
+
+export {onSubmitClick};

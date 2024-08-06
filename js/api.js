@@ -1,7 +1,7 @@
 import { renderPosts } from './thumbnail.js';
+import { showDownloadError } from './errors.js';
 
-const body = document.querySelector('body');
-const dataLoadingError = document.querySelector('#data-error').content.querySelector('.data-error').cloneNode(true);
+
 let photosArray = [];
 
 function getData() {
@@ -17,10 +17,7 @@ function getData() {
       photosArray = photos;
     })
     .catch(() => {
-      body.appendChild(dataLoadingError);
-      setTimeout(() => {
-        body.removeChild(dataLoadingError);
-      }, 5000);
+      showDownloadError();
     })
 }
 
