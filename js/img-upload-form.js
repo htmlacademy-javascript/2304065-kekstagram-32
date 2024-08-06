@@ -42,7 +42,7 @@ function onImgUploadEditing() {
   showModal();
 }
 
-function setFormSubmit(onSuccess) {
+function setFormSubmit() {
   imgUploadForm.addEventListener('submit', (evt) => {
     evt.preventDefault();
 
