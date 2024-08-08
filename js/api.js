@@ -1,7 +1,7 @@
 import { renderPosts } from './thumbnail.js';
 import { showDownloadError } from './errors.js';
 
-let photosArray = [];
+const photosArray = [];
 
 function getData() {
   fetch('https://32.javascript.htmlacademy.pro/kekstagram/data')
@@ -13,7 +13,7 @@ function getData() {
     })
     .then((photos) => {
       renderPosts(photos);
-      photosArray = photos;
+      photosArray.concat(photos);
     })
     .catch(() => {
       showDownloadError();

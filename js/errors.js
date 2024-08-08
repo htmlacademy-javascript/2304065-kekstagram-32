@@ -1,4 +1,5 @@
 import { isEscapeEvt } from './utils.js';
+import { closeModal } from './img-upload-form.js';
 
 const body = document.querySelector('body');
 const dataLoadingError = document.querySelector('#data-error').content.querySelector('.data-error').cloneNode(true);
@@ -68,6 +69,7 @@ function hideUploadSuccess() {
   successButton.addEventListener('.click', hideUploadSuccess);
   document.removeEventListener('click', onClickBodySuccess);
   document.removeEventListener('keydown', onEscapeKeyClickBodySuccess);
+  closeModal();
 }
 
 export {showDownloadError, showUploadError, showUploadSuccess};
