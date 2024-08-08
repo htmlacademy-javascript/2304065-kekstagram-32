@@ -1,6 +1,7 @@
 import { isEscapeEvt } from './utils.js';
 import { resetScale } from './scale.js';
 import { initSlider, resetSlider } from './effect.js';
+import { showUploadError, showUploadSuccess } from './errors.js';
 
 const MAX_HASHTAG_COUNT = 5;
 const VALID_HASHTAG = /^#[a-zа-яё0-9]{1,19}$/i;
@@ -17,6 +18,7 @@ const imgUploadOverlay = imgUploadForm.querySelector('.img-upload__overlay');
 const imgUploadCancel = imgUploadForm.querySelector('.img-upload__cancel');
 const hashtagInput = imgUploadForm.querySelector('.text__hashtags');
 const imgComment = imgUploadForm.querySelector('.text__description');
+const buttonUploadSubmit = imgUploadForm.querySelector('.img-upload__submit');
 
 const pristine = new Pristine(imgUploadForm, {
   classTo: 'img-upload__field-wrapper',
@@ -41,8 +43,44 @@ function onImgUploadEditing() {
   showModal();
 }
 
-function onSubmitClick(evt) {
-  evt.preventDefault();
+function disabledButtonSubmit() {
+  buttonUploadSubmit.disabled = true;
+  buttonUploadSubmit.textContent = 'Загружаем...';
+}
+
+function enabledButtonSubmit() {
+  buttonUploadSubmit.disabled = false;
+  buttonUploadSubmit.textContent = 'Опубликовать';
+}
+
+function setFormSubmit() {
+  imgUploadForm.addEventListener('submit', (evt) => {
+    evt.preventDefault();
+
+    const isValid = pristine.validate();
+    if (isValid) {
+      disabledButtonSubmit();
+      const formData = new FormData(evt.target);
+      fetch (
+        'https://32.javascript.htmlacademy.pro/kekstagram',
+        {
+          method: 'POST',
+          body: formData
+        }
+      )
+        .then((response) => {
+          if(response.ok) {
+            showUploadSuccess();
+          }
+        })
+        .catch(() => {
+          showUploadError();
+        })
+        .finally(() => {
+          enabledButtonSubmit();
+        });
+    }
+  });
 }
 
 function showModal() {
@@ -65,7 +103,6 @@ function closeModal() {
 
 imgUploadInput.addEventListener('change', onImgUploadEditing);
 imgUploadCancel.addEventListener('click', closeModal);
-imgUploadForm.addEventListener('submit', onSubmitClick);
 
 function normalizeHashtag(string) {
   return string.trim().split(' ').filter((tag) => Boolean(tag.length));
@@ -109,3 +146,5 @@ pristine.addValidator(
 );
 
 initSlider();
+
+export {setFormSubmit, closeModal};
