@@ -1,6 +1,5 @@
 import { renderPosts } from './thumbnail.js';
 import { showDownloadError } from './errors.js';
-import { showImgFilters } from './img-filters.js';
 
 const photosArray = [];
 
@@ -15,7 +14,6 @@ function getData() {
     .then((photos) => {
       renderPosts(photos);
       photosArray.concat(photos);
-      showImgFilters();
     })
     .catch(() => {
       showDownloadError();
