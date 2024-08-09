@@ -1,4 +1,11 @@
+import { getRandomInteger } from './utils.js';
+
 const IMG_RANDOM_COUNT = 10;
+const FilterType = {
+  DEFAULT: 'filter-default',
+  RANDOM: 'filter-random',
+  DISCUSSED: 'filter-discussed'
+};
 
 const imgFilters = document.querySelector('.img-filters');
 
