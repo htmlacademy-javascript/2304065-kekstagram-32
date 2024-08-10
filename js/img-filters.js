@@ -1,6 +1,7 @@
 import { photosArray } from './api.js';
 import { renderPosts } from './thumbnail.js';
 import { getRandomInteger } from './utils.js';
+import { getData } from './api.js';
 
 const IMG_RANDOM_COUNT = 10;
 
@@ -22,6 +23,12 @@ function sortRandom() {
   return Math.random() - 0.5;
 }
 
+function setFilterDefault(evt) {
+  evt.preventDefault();
+  clearPosts();
+  getData();
+}
+
 function setFilterRandom(evt) {
   evt.preventDefault();
   clearPosts();
@@ -29,9 +36,10 @@ function setFilterRandom(evt) {
 }
 
 buttonFilterRandom.addEventListener('click', setFilterRandom);
+buttonFilterDefault.addEventListener('click', setFilterDefault);
 
 function initFilter() {
   imgFilters.classList.remove('img-filters--inactive');
 }
 
-export {initFilter,};
+export {initFilter};
