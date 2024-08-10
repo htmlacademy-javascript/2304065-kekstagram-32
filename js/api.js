@@ -1,7 +1,9 @@
 import { renderPosts } from './thumbnail.js';
 import { showDownloadError } from './errors.js';
 
-const photosArray = [];
+// const photosArray = [];
+// Пришлось вернуть let, т.к. после объединения получался пустой массив
+let photosArray = [];
 
 function getData() {
   fetch('https://32.javascript.htmlacademy.pro/kekstagram/data')
@@ -13,11 +15,15 @@ function getData() {
     })
     .then((photos) => {
       renderPosts(photos);
-      photosArray.concat(photos);
+      // photosArray.concat(photos);
+      photosArray = photos;
     })
     .catch(() => {
       showDownloadError();
-    });
+    })
+    .finally(() => {
+      console.log('phototsArray', photosArray);
+    })
 }
 
 export {getData, photosArray};
