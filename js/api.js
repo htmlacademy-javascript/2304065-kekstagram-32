@@ -21,9 +21,6 @@ function getData() {
     .catch(() => {
       showDownloadError();
     })
-    .finally(() => {
-      console.log('phototsArray', photosArray);
-    })
 }
 
 export {getData, photosArray};
