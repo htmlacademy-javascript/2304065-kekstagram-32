@@ -35,8 +35,15 @@ function setFilterRandom(evt) {
   renderPosts(photosArray.sort(sortRandom).slice(0, IMG_RANDOM_COUNT));
 }
 
-buttonFilterRandom.addEventListener('click', setFilterRandom);
+function setFilterDiscussed(evt) {
+  evt.preventDefault();
+  clearPosts();
+  renderPosts(photosArray.slice().sort(sortCommentsDescending));
+}
+
 buttonFilterDefault.addEventListener('click', setFilterDefault);
+buttonFilterRandom.addEventListener('click', setFilterRandom);
+buttonFilterDiscussed.addEventListener('click', setFilterDiscussed);
 
 function initFilter() {
   imgFilters.classList.remove('img-filters--inactive');
