@@ -13,6 +13,7 @@ const ERROR_TEXT = {
 
 const body = document.querySelector('body');
 const imgUploadForm = document.querySelector('.img-upload__form');
+const imgUploadPreview = imgUploadForm.querySelector('img');
 const imgUploadInput = imgUploadForm.querySelector('.img-upload__input');
 const imgUploadOverlay = imgUploadForm.querySelector('.img-upload__overlay');
 const imgUploadCancel = imgUploadForm.querySelector('.img-upload__cancel');
@@ -20,7 +21,7 @@ const hashtagInput = imgUploadForm.querySelector('.text__hashtags');
 const imgComment = imgUploadForm.querySelector('.text__description');
 const buttonUploadSubmit = imgUploadForm.querySelector('.img-upload__submit');
 
-const imgExtensions = ['png', 'jpeg', 'jpg', 'gif'];
+const IMG_EXTENSIONS = ['png', 'jpeg', 'jpg', 'gif'];
 
 const pristine = new Pristine(imgUploadForm, {
   classTo: 'img-upload__field-wrapper',
@@ -38,6 +39,16 @@ function onDocumentKeydown(evt) {
 function cancelEscape(evt) {
   if (isEscapeEvt(evt)) {
     evt.stopPropagation();
+  }
+}
+
+function renderImgPreview() {
+  const imgUpload = imgUploadInput.files[0];
+  const imgName = imgUpload.name.toLowerCase();
+  const matches = IMG_EXTENSIONS.some((it) => imgName.endWith(it));
+
+  if(matches) {
+    imgUploadPreview.src = URL.createObjectURL(imgUpload);
   }
 }
 
