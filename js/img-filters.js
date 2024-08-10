@@ -1,6 +1,5 @@
 import { photosArray } from './api.js';
 import { renderPosts } from './thumbnail.js';
-import { getRandomInteger } from './utils.js';
 import { getData } from './api.js';
 
 const IMG_RANDOM_COUNT = 10;
@@ -25,20 +24,32 @@ function sortRandom() {
 
 function setFilterDefault(evt) {
   evt.preventDefault();
+  onFilterClick(evt);
   clearPosts();
   getData();
 }
 
 function setFilterRandom(evt) {
   evt.preventDefault();
+  onFilterClick(evt);
   clearPosts();
   renderPosts(photosArray.sort(sortRandom).slice(0, IMG_RANDOM_COUNT));
 }
 
 function setFilterDiscussed(evt) {
   evt.preventDefault();
+  onFilterClick(evt);
   clearPosts();
   renderPosts(photosArray.slice().sort(sortCommentsDescending));
+}
+
+function onFilterClick(evt) {
+  if (evt.target.classList.contains('img-filters__button--active') || evt.target.classList.contains('img-filters')) {
+    return;
+  }
+
+  imgFilters.querySelector('.img-filters__button--active').classList.remove('img-filters__button--active');
+  evt.target.classList.add('img-filters__button--active');
 }
 
 buttonFilterDefault.addEventListener('click', setFilterDefault);
