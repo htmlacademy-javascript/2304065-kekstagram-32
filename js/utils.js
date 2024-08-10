@@ -25,7 +25,7 @@ function isEscapeEvt (evt) {
   return evt.key === 'Escape';
 }
 
-function debounce (callback, timeoutDelay = 500) {
+function debounce(callback, timeoutDelay) {
   let timeoutId;
 
   return (...rest) => {
@@ -34,4 +34,4 @@ function debounce (callback, timeoutDelay = 500) {
   };
 }
 
-export { createUniqNumber, getRandomInteger, isEscapeEvt};
+export { createUniqNumber, getRandomInteger, isEscapeEvt, debounce};

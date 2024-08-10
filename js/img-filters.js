@@ -1,8 +1,9 @@
-import { photosArray } from './api.js';
+import { getData, photosArray } from './api.js';
 import { renderPosts } from './thumbnail.js';
-import { getData } from './api.js';
+import { debounce } from './utils.js';
 
 const IMG_RANDOM_COUNT = 10;
+const RENDER_POSTS_DELAY = 500;
 
 const imgFilters = document.querySelector('.img-filters');
 const buttonFilterDefault = imgFilters.querySelector('#filter-default');
@@ -25,22 +26,35 @@ function sortRandom() {
 function setFilterDefault(evt) {
   evt.preventDefault();
   onFilterClick(evt);
-  clearPosts();
-  getData();
+  debounce(() => {
+    clearPosts();
+    getData();
+  },
+  RENDER_POSTS_DELAY
+  )();
 }
 
 function setFilterRandom(evt) {
   evt.preventDefault();
   onFilterClick(evt);
-  clearPosts();
-  renderPosts(photosArray.sort(sortRandom).slice(0, IMG_RANDOM_COUNT));
+  debounce(() => {
+    clearPosts();
+    renderPosts(photosArray.sort(sortRandom).slice(0, IMG_RANDOM_COUNT));
+  },
+  RENDER_POSTS_DELAY
+  )();
 }
+
 
 function setFilterDiscussed(evt) {
   evt.preventDefault();
   onFilterClick(evt);
-  clearPosts();
-  renderPosts(photosArray.slice().sort(sortCommentsDescending));
+  debounce(() => {
+    clearPosts();
+    renderPosts(photosArray.slice().sort(sortCommentsDescending));
+  },
+  RENDER_POSTS_DELAY
+  )();
 }
 
 function onFilterClick(evt) {
