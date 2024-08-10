@@ -20,6 +20,8 @@ const hashtagInput = imgUploadForm.querySelector('.text__hashtags');
 const imgComment = imgUploadForm.querySelector('.text__description');
 const buttonUploadSubmit = imgUploadForm.querySelector('.img-upload__submit');
 
+const imgExtensions = ['png', 'jpeg', 'jpg', 'gif'];
+
 const pristine = new Pristine(imgUploadForm, {
   classTo: 'img-upload__field-wrapper',
   errorTextParent: 'img-upload__field-wrapper',
