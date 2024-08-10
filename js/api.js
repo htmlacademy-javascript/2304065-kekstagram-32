@@ -1,5 +1,6 @@
 import { renderPosts } from './thumbnail.js';
 import { showDownloadError } from './errors.js';
+import { initFilter } from './img-filters.js';
 
 // const photosArray = [];
 // Пришлось вернуть let, т.к. после объединения получался пустой массив
@@ -17,6 +18,7 @@ function getData() {
       renderPosts(photos);
       // photosArray.concat(photos);
       photosArray = photos;
+      initFilter();
     })
     .catch(() => {
       showDownloadError();
