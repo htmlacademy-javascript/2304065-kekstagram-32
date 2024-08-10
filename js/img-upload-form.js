@@ -10,6 +10,7 @@ const ERROR_TEXT = {
   NOT_UNIQUE: 'Хэштег уже существует',
   INVALID_COUNT: `Максимум ${MAX_HASHTAG_COUNT} хэштегов`
 };
+const IMG_EXTENSIONS = ['png', 'jpeg', 'jpg', 'gif'];
 
 const body = document.querySelector('body');
 const imgUploadForm = document.querySelector('.img-upload__form');
@@ -20,8 +21,6 @@ const imgUploadCancel = imgUploadForm.querySelector('.img-upload__cancel');
 const hashtagInput = imgUploadForm.querySelector('.text__hashtags');
 const imgComment = imgUploadForm.querySelector('.text__description');
 const buttonUploadSubmit = imgUploadForm.querySelector('.img-upload__submit');
-
-const IMG_EXTENSIONS = ['png', 'jpeg', 'jpg', 'gif'];
 
 const pristine = new Pristine(imgUploadForm, {
   classTo: 'img-upload__field-wrapper',
@@ -45,7 +44,7 @@ function cancelEscape(evt) {
 function renderImgPreview() {
   const imgUpload = imgUploadInput.files[0];
   const imgName = imgUpload.name.toLowerCase();
-  const matches = IMG_EXTENSIONS.some((it) => imgName.endWith(it));
+  const matches = IMG_EXTENSIONS.some((it) => imgName.endsWith(it));
 
   if(matches) {
     imgUploadPreview.src = URL.createObjectURL(imgUpload);
@@ -102,6 +101,7 @@ function showModal() {
   document.addEventListener('keydown', onDocumentKeydown);
   hashtagInput.addEventListener('keydown', cancelEscape);
   imgComment.addEventListener('keydown', cancelEscape);
+  renderImgPreview();
 }
 
 function closeModal() {
