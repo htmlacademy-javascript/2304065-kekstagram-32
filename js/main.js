@@ -5,7 +5,7 @@ import { initFilter } from './img-filters.js';
 import { showDownloadError } from './errors.js';
 import { renderPosts } from './thumbnail.js';
 
-// getData();
+getData();
   // .then((photos) => {
   //   console.log(photos);
   //   renderPosts(photos);
@@ -26,9 +26,9 @@ import { renderPosts } from './thumbnail.js';
 //   showDownloadError();
 // }
 
-getData()
-  .then((photos) => {
-    renderPosts(photos);
-    photosArray.push(...photos);
-    initFilter();
-  });
+// getData()
+//   .then((photos) => {
+//     renderPosts(photos);
+//     photosArray.push(...photos);
+//     initFilter();
+//   });
