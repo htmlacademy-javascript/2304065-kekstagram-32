@@ -14,7 +14,7 @@ const METHOD = {
 
 const photosArray = [];
 
-function makeRequest(url, route, method, body = null) {
+async function makeRequest(url, route, method, body = null) {
   fetch(`${url}${route}`, {method, body})
     .then((response) => {
       if(response.ok) {
@@ -22,24 +22,36 @@ function makeRequest(url, route, method, body = null) {
       }
       throw new Error();
     })
-    .then((photos) => {
-      renderPosts(photos);
-      photosArray.push(...photos);
-      initFilter();
-    })
+    // .then((photos) => {
+    //   renderPosts(photos);
+    //   photosArray.push(...photos);
+    //   initFilter();
+    // })
     .catch((err) => {
       throw new Error(err.message);
     });
 }
 
-function getData() {
-  try {
-    initFilter();
-    makeRequest(SERVER_URL, ROUTE.GET, METHOD.GET);
+// function getData() {
+//   fetch('https://32.javascript.htmlacademy.pro/kekstagram/data')
+//     .then((response) => {
+//       if(response.ok) {
+//         return response.json();
+//       }
+//       throw new Error();
+//     })
+//     .then((photos) => {
+//       renderPosts(photos);
+//       photosArray.push(...photos);
+//       initFilter();
+//     })
+//     .catch(() => {
+//       showDownloadError();
+//     });
+// }
 
-  } catch {
-    showDownloadError();
-  }
+function getData() {
+  makeRequest(SERVER_URL, ROUTE.GET, METHOD.GET);
 }
 
 export {getData, photosArray};
