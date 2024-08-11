@@ -3,8 +3,13 @@ import { getData } from './api.js';
 import { setFormSubmit } from './img-upload-form.js';
 import { initFilter } from './img-filters.js';
 import { showDownloadError } from './errors.js';
+import { renderPosts } from './thumbnail.js';
 
-
-getData();
-// console.log('getData', getData());
 // setFormSubmit();
+try {
+  getData();
+  renderPosts(getData());
+  initFilter();
+} catch {
+  showDownloadError();
+}
