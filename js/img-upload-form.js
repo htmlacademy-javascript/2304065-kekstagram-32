@@ -47,7 +47,12 @@ function renderImgPreview() {
   const matches = IMG_EXTENSIONS.some((it) => imgName.endsWith(it));
 
   if(matches) {
+    const imgFiltersPrewievs = imgUploadForm.querySelectorAll('.effects__preview');
     imgUploadPreview.src = URL.createObjectURL(imgUpload);
+
+    imgFiltersPrewievs.forEach((item) => {
+      item.style = `background-image: url('${imgUploadPreview.src}')`;
+    });
   }
 }
 
