@@ -5,16 +5,16 @@ import { initFilter } from './img-filters.js';
 const SERVER_URL = 'https://32.javascript.htmlacademy.pro/kekstagram';
 const ROUTE = {
   GET: '/data',
-  POST: ''
+  POST: '',
 };
 const METHOD = {
   GET: 'GET',
-  POST: 'POST'
+  POST: 'POST',
 };
 
 const photosArray = [];
 
-async function makeRequest(url, route, method, body = null) {
+function makeRequest(url, route, method, body = null) {
   fetch(`${url}${route}`, {method, body})
     .then((response) => {
       if(response.ok) {
@@ -22,11 +22,6 @@ async function makeRequest(url, route, method, body = null) {
       }
       throw new Error();
     })
-    // .then((photos) => {
-    //   renderPosts(photos);
-    //   photosArray.push(...photos);
-    //   initFilter();
-    // })
     .catch((err) => {
       throw new Error(err.message);
     });

@@ -5,7 +5,7 @@ import { initFilter } from './img-filters.js';
 import { showDownloadError } from './errors.js';
 import { renderPosts } from './thumbnail.js';
 
-getData(renderPosts);
+// getData();
   // .then((photos) => {
   //   console.log(photos);
   //   renderPosts(photos);
@@ -19,9 +19,16 @@ getData(renderPosts);
 
 // setFormSubmit();
 // try {
-//   getData();
-//   renderPosts(getData());
+//   const photos = await getData();
+//   renderPosts(photos);
 //   initFilter();
 // } catch {
 //   showDownloadError();
 // }
+
+getData()
+  .then((photos) => {
+    renderPosts(photos);
+    photosArray.push(...photos);
+    initFilter();
+  });
