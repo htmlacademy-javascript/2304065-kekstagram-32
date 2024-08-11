@@ -2,6 +2,7 @@ import { isEscapeEvt } from './utils.js';
 import { resetScale } from './scale.js';
 import { initSlider, resetSlider } from './effect.js';
 import { showUploadError, showUploadSuccess } from './errors.js';
+import { sendData } from './api.js';
 
 const MAX_HASHTAG_COUNT = 5;
 const VALID_HASHTAG = /^#[a-zа-яё0-9]{1,19}$/i;
@@ -78,13 +79,7 @@ function setFormSubmit() {
     if (isValid) {
       disabledButtonSubmit();
       const formData = new FormData(evt.target);
-      fetch (
-        'https://32.javascript.htmlacademy.pro/kekstagram',
-        {
-          method: 'POST',
-          body: formData
-        }
-      )
+      sendData(formData)
         .then((response) => {
           if(response.ok) {
             showUploadSuccess();
@@ -99,6 +94,35 @@ function setFormSubmit() {
     }
   });
 }
+// function setFormSubmit() {
+//   imgUploadForm.addEventListener('submit', (evt) => {
+//     evt.preventDefault();
+
+//     const isValid = pristine.validate();
+//     if (isValid) {
+//       disabledButtonSubmit();
+//       const formData = new FormData(evt.target);
+//       fetch (
+//         'https://32.javascript.htmlacademy.pro/kekstagram',
+//         {
+//           method: 'POST',
+//           body: formData
+//         }
+//       )
+//         .then((response) => {
+//           if(response.ok) {
+//             showUploadSuccess();
+//           }
+//         })
+//         .catch(() => {
+//           showUploadError();
+//         })
+//         .finally(() => {
+//           enabledButtonSubmit();
+//         });
+//     }
+//   });
+// }
 
 function showModal() {
   body.classList.add('modal-open');
