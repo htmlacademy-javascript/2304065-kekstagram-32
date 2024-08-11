@@ -2,9 +2,7 @@ import { renderPosts } from './thumbnail.js';
 import { showDownloadError } from './errors.js';
 import { initFilter } from './img-filters.js';
 
-// const photosArray = [];
-// Пришлось вернуть let, т.к. после объединения получался пустой массив
-let photosArray = [];
+const photosArray = [];
 
 function getData() {
   fetch('https://32.javascript.htmlacademy.pro/kekstagram/data')
@@ -16,8 +14,7 @@ function getData() {
     })
     .then((photos) => {
       renderPosts(photos);
-      // photosArray.concat(photos);
-      photosArray = photos;
+      photosArray.push(...photos);
       initFilter();
     })
     .catch(() => {
