@@ -74,23 +74,22 @@ function enabledButtonSubmit() {
 function setFormSubmit() {
   imgUploadForm.addEventListener('submit', (evt) => {
     evt.preventDefault();
-
     const isValid = pristine.validate();
     if (isValid) {
       disabledButtonSubmit();
       const formData = new FormData(evt.target);
-      sendData(formData)
-        .then((response) => {
-          if(response.ok) {
-            showUploadSuccess();
-          }
-        })
-        .catch(() => {
-          showUploadError();
-        })
-        .finally(() => {
-          enabledButtonSubmit();
-        });
+      return sendData(formData);
+        // .then((response) => {
+        //   if(response.ok) {
+        //     showUploadSuccess();
+        //   }
+        // })
+        // .catch(() => {
+        //   showUploadError();
+        // })
+        // .finally(() => {
+        //   enabledButtonSubmit();
+        // });
     }
   });
 }
@@ -189,4 +188,4 @@ pristine.addValidator(
 
 initSlider();
 
-export {setFormSubmit, closeModal};
+export {setFormSubmit, closeModal, enabledButtonSubmit};
