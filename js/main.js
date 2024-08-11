@@ -5,11 +5,12 @@ import { initFilter } from './img-filters.js';
 import { showDownloadError } from './errors.js';
 import { renderPosts } from './thumbnail.js';
 
+getData();
 // setFormSubmit();
-try {
-  getData();
-  renderPosts(getData());
-  initFilter();
-} catch {
-  showDownloadError();
-}
+// try {
+//   getData();
+//   renderPosts(getData());
+//   initFilter();
+// } catch {
+//   showDownloadError();
+// }

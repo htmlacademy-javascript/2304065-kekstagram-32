@@ -22,31 +22,24 @@ function makeRequest(url, route, method, body = null) {
       }
       throw new Error();
     })
+    .then((photos) => {
+      renderPosts(photos);
+      photosArray.push(...photos);
+      initFilter();
+    })
     .catch((err) => {
       throw new Error(err.message);
     });
 }
 
-// function getData() {
-//   fetch('https://32.javascript.htmlacademy.pro/kekstagram/data')
-//     .then((response) => {
-//       if(response.ok) {
-//         return response.json();
-//       }
-//       throw new Error();
-//     })
-//     .then((photos) => {
-//       renderPosts(photos);
-//       photosArray.push(...photos);
-//       initFilter();
-//     })
-//     .catch(() => {
-//       showDownloadError();
-//     });
-// }
-
 function getData() {
-  makeRequest(SERVER_URL, ROUTE.GET, METHOD.GET);
+  try {
+    initFilter();
+    makeRequest(SERVER_URL, ROUTE.GET, METHOD.GET);
+
+  } catch {
+    showDownloadError();
+  }
 }
 
 export {getData, photosArray};
