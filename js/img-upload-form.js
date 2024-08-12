@@ -93,6 +93,7 @@ function setFormSubmit() {
     }
   });
 }
+
 // function setFormSubmit() {
 //   imgUploadForm.addEventListener('submit', (evt) => {
 //     evt.preventDefault();
@@ -130,6 +131,7 @@ function showModal() {
   hashtagInput.addEventListener('keydown', cancelEscape);
   imgComment.addEventListener('keydown', cancelEscape);
   renderImgPreview();
+  setFormSubmit();
 }
 
 function closeModal() {

@@ -11,7 +11,7 @@ const FilterTypes = {
 };
 
 const imgFilters = document.querySelector('.img-filters');
-const imgFiltersForm = imgFilters.querySelector('.img-filters__form')
+const imgFiltersForm = imgFilters.querySelector('.img-filters__form');
 const buttonFilterDefault = imgFilters.querySelector('#filter-default');
 const buttonFilterRandom = imgFilters.querySelector('#filter-random');
 const buttonFilterDiscussed = imgFilters.querySelector('#filter-discussed');
@@ -30,19 +30,20 @@ function sortRandom() {
 }
 
 function filter(evt) {
-  onFilterClick(evt);
   clearPosts();
+  onFilterClick(evt);
 
   if (evt.target.id === FilterTypes.RANDOM) {
-    renderPosts(photosArray.sort(sortRandom).slice(0, IMG_RANDOM_COUNT));
-    return;
+    console.log('FilterTypes.RANDOM', evt.target.id);
+    return renderPosts(photosArray.sort(sortRandom).slice(0, IMG_RANDOM_COUNT));
   }
   if (evt.target.id === FilterTypes.DISCUSSED) {
-    renderPosts(photosArray.slice().sort(sortCommentsDescending));
-    return;
+    console.log('FilterTypes.DISCUSSED', evt.target.id);
+    return renderPosts(photosArray.slice().sort(sortCommentsDescending));
   }
   if (evt.target.id === FilterTypes.DEFAULT) {
-    getData();
+    console.log('FilterTypes.DEFAULT', evt.target.id);
+    return getData();
   }
 }
 

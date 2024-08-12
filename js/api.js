@@ -5,7 +5,7 @@ import { enabledButtonSubmit } from './img-upload-form.js';
 const SERVER_URL = 'https://32.javascript.htmlacademy.pro/kekstagram';
 const ROUTE = {
   GET: '/data',
-  POST: '/',
+  POST: '',
 };
 const METHOD = {
   GET: 'GET',
