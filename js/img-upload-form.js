@@ -78,18 +78,18 @@ function setFormSubmit() {
     if (isValid) {
       disabledButtonSubmit();
       const formData = new FormData(evt.target);
-      return sendData(formData);
-        // .then((response) => {
-        //   if(response.ok) {
-        //     showUploadSuccess();
-        //   }
-        // })
-        // .catch(() => {
-        //   showUploadError();
-        // })
-        // .finally(() => {
-        //   enabledButtonSubmit();
-        // });
+      sendData(formData)
+        .then((response) => {
+          if(response.ok) {
+            showUploadSuccess();
+          }
+        })
+        .catch(() => {
+          showUploadError();
+        })
+        .finally(() => {
+          enabledButtonSubmit();
+        });
     }
   });
 }
