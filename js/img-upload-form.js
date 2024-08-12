@@ -89,8 +89,8 @@ function setFormSubmit() {
 }
 
 function showModal() {
-  body.classList.add('modal-open');
   imgUploadOverlay.classList.remove('hidden');
+  body.classList.add('modal-open');
   document.addEventListener('keydown', onDocumentKeydown);
   hashtagInput.addEventListener('keydown', cancelEscape);
   imgComment.addEventListener('keydown', cancelEscape);
@@ -99,8 +99,8 @@ function showModal() {
 }
 
 function closeModal() {
-  body.classList.remove('modal-open');
   imgUploadOverlay.classList.add('hidden');
+  body.classList.remove('modal-open');
   document.removeEventListener('keydown', onDocumentKeydown);
   imgUploadForm.reset();
   pristine.reset();
