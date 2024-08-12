@@ -12,11 +12,6 @@ const FilterTypes = {
 
 const imgFilters = document.querySelector('.img-filters');
 const imgFiltersForm = imgFilters.querySelector('.img-filters__form');
-const buttonFilterDefault = imgFilters.querySelector('#filter-default');
-const buttonFilterRandom = imgFilters.querySelector('#filter-random');
-const buttonFilterDiscussed = imgFilters.querySelector('#filter-discussed');
-const pictureContainer = document.querySelector('.pictures');
-
 
 function sortCommentsDescending(postA, postB) {
   return postB.comments.length - postA.comments.length;
@@ -53,18 +48,18 @@ function onFilterClick(evt) {
   evt.target.classList.add('img-filters__button--active');
 }
 
-// function addEventListenerClick(cb) {
-//   imgFiltersForm.addEventListener('click',(evt) => filter(evt, cb));
-// }
+function delayFilter() {
+  const debouncedFilter = debounce(filter, RENDER_POSTS_DELAY);
+  imgFiltersForm.addEventListener('click', (evt) => {
+    onFilterClick(evt);
+    debouncedFilter(evt);
+  });
 
-imgFiltersForm.addEventListener('click',(evt) => filter(evt));
+}
 
-// function debounceClick() {
-//   debounce(onFilterClick(), RENDER_POSTS_DELAY);
-// }
 
 function initFilter() {
   imgFilters.classList.remove('img-filters--inactive');
 }
 
-export {initFilter};
+export {initFilter, delayFilter};
