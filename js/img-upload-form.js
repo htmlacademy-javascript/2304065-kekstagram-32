@@ -82,7 +82,6 @@ function setFormSubmit() {
         .then((response) => {
           if(response) {
             showUploadSuccess();
-            console.log('resp', response);
           }
         })
         .catch(() => {
@@ -94,36 +93,6 @@ function setFormSubmit() {
     }
   });
 }
-
-// function setFormSubmit() {
-//   imgUploadForm.addEventListener('submit', (evt) => {
-//     evt.preventDefault();
-
-//     const isValid = pristine.validate();
-//     if (isValid) {
-//       disabledButtonSubmit();
-//       const formData = new FormData(evt.target);
-//       fetch (
-//         'https://32.javascript.htmlacademy.pro/kekstagram',
-//         {
-//           method: 'POST',
-//           body: formData
-//         }
-//       )
-//         .then((response) => {
-//           if(response.ok) {
-//             showUploadSuccess();
-//           }
-//         })
-//         .catch(() => {
-//           showUploadError();
-//         })
-//         .finally(() => {
-//           enabledButtonSubmit();
-//         });
-//     }
-//   });
-// }
 
 function showModal() {
   body.classList.add('modal-open');

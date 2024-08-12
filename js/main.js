@@ -8,7 +8,6 @@ import { enabledButtonSubmit } from './img-upload-form.js';
 
 getData().then((photos) => {
   renderPosts(photos);
-  photosArray.push(...photos);
   initFilter();
 })
   .catch(() => {

@@ -4,7 +4,13 @@ import { photosArray } from './api.js';
 const pictureTemplate = document.querySelector('#picture').content.querySelector('.picture');
 const picturesContainer = document.querySelector('.pictures');
 
+function clearPosts() {
+  picturesContainer.querySelectorAll('.picture').forEach((item) => item.remove());
+}
+
+
 function renderPosts(posts) {
+  clearPosts();
   const fragment = document.createDocumentFragment();
 
   posts.forEach((item) => {

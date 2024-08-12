@@ -17,12 +17,13 @@ const buttonFilterRandom = imgFilters.querySelector('#filter-random');
 const buttonFilterDiscussed = imgFilters.querySelector('#filter-discussed');
 const pictureContainer = document.querySelector('.pictures');
 
-function clearPosts() {
-  pictureContainer.querySelectorAll('.picture').forEach((item) => item.remove());
-}
 
 function sortCommentsDescending(postA, postB) {
   return postB.comments.length - postA.comments.length;
+}
+
+function sortIdInOrder(idA, idB) {
+  return idA.id - idB.id;
 }
 
 function sortRandom() {
@@ -30,20 +31,15 @@ function sortRandom() {
 }
 
 function filter(evt) {
-  clearPosts();
   onFilterClick(evt);
 
   if (evt.target.id === FilterTypes.DEFAULT) {
-    console.log('FilterTypes.DEFAULT', evt.target.id);
-    // getData();
-    return renderPosts(photosArray);
+    return renderPosts(photosArray.sort(sortIdInOrder));
   }
   if (evt.target.id === FilterTypes.RANDOM) {
-    console.log('FilterTypes.RANDOM', evt.target.id);
     return renderPosts(photosArray.sort(sortRandom).slice(0, IMG_RANDOM_COUNT));
   }
   if (evt.target.id === FilterTypes.DISCUSSED) {
-    console.log('FilterTypes.DISCUSSED', evt.target.id);
     return renderPosts(photosArray.slice().sort(sortCommentsDescending));
   }
 }
