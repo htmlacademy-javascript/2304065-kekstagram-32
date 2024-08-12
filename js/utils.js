@@ -25,6 +25,12 @@ function isEscapeEvt (evt) {
   return evt.key === 'Escape';
 }
 
+function cancelEscape(evt) {
+  if (isEscapeEvt(evt)) {
+    evt.stopPropagation();
+  }
+}
+
 function debounce(callback, timeoutDelay) {
   let timeoutId;
 
@@ -34,4 +40,4 @@ function debounce(callback, timeoutDelay) {
   };
 }
 
-export { createUniqNumber, getRandomInteger, isEscapeEvt, debounce};
+export { createUniqNumber, getRandomInteger, isEscapeEvt, debounce, cancelEscape};

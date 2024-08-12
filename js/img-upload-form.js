@@ -1,4 +1,4 @@
-import { isEscapeEvt } from './utils.js';
+import { isEscapeEvt, cancelEscape } from './utils.js';
 import { resetScale } from './scale.js';
 import { initSlider, resetSlider } from './effect.js';
 import { showUploadError, showUploadSuccess } from './errors.js';
@@ -33,12 +33,6 @@ function onDocumentKeydown(evt) {
   if (isEscapeEvt(evt)) {
     evt.preventDefault();
     closeModal();
-  }
-}
-
-function cancelEscape(evt) {
-  if (isEscapeEvt(evt)) {
-    evt.stopPropagation();
   }
 }
 
@@ -160,4 +154,4 @@ pristine.addValidator(
 
 initSlider();
 
-export {setFormSubmit, closeModal, enabledButtonSubmit};
+export {setFormSubmit, closeModal, enabledButtonSubmit, onDocumentKeydown};
