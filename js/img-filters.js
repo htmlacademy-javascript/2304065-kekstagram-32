@@ -1,4 +1,4 @@
-import { getData, photosArray } from './api.js';
+import { photosArray } from './api.js';
 import { renderPosts } from './thumbnail.js';
 import { debounce } from './utils.js';
 
