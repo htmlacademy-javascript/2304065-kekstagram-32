@@ -80,8 +80,9 @@ function setFormSubmit() {
       const formData = new FormData(evt.target);
       sendData(formData)
         .then((response) => {
-          if(response.ok) {
+          if(response) {
             showUploadSuccess();
+            console.log('resp', response);
           }
         })
         .catch(() => {

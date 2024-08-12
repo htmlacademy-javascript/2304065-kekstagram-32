@@ -33,6 +33,11 @@ function filter(evt) {
   clearPosts();
   onFilterClick(evt);
 
+  if (evt.target.id === FilterTypes.DEFAULT) {
+    console.log('FilterTypes.DEFAULT', evt.target.id);
+    // getData();
+    return renderPosts(photosArray);
+  }
   if (evt.target.id === FilterTypes.RANDOM) {
     console.log('FilterTypes.RANDOM', evt.target.id);
     return renderPosts(photosArray.sort(sortRandom).slice(0, IMG_RANDOM_COUNT));
@@ -40,10 +45,6 @@ function filter(evt) {
   if (evt.target.id === FilterTypes.DISCUSSED) {
     console.log('FilterTypes.DISCUSSED', evt.target.id);
     return renderPosts(photosArray.slice().sort(sortCommentsDescending));
-  }
-  if (evt.target.id === FilterTypes.DEFAULT) {
-    console.log('FilterTypes.DEFAULT', evt.target.id);
-    return getData();
   }
 }
 
