@@ -1,7 +1,8 @@
-import { isEscapeEvt } from './utils.js';
+import { isEscapeEvt, cancelEscape } from './utils.js';
 import { resetScale } from './scale.js';
 import { initSlider, resetSlider } from './effect.js';
 import { showUploadError, showUploadSuccess } from './errors.js';
+import { sendData } from './api.js';
 
 const MAX_HASHTAG_COUNT = 5;
 const VALID_HASHTAG = /^#[a-zа-яё0-9]{1,19}$/i;
@@ -10,9 +11,11 @@ const ERROR_TEXT = {
   NOT_UNIQUE: 'Хэштег уже существует',
   INVALID_COUNT: `Максимум ${MAX_HASHTAG_COUNT} хэштегов`
 };
+const IMG_EXTENSIONS = ['png', 'jpeg', 'jpg', 'gif'];
 
 const body = document.querySelector('body');
 const imgUploadForm = document.querySelector('.img-upload__form');
+const imgUploadPreview = imgUploadForm.querySelector('img');
 const imgUploadInput = imgUploadForm.querySelector('.img-upload__input');
 const imgUploadOverlay = imgUploadForm.querySelector('.img-upload__overlay');
 const imgUploadCancel = imgUploadForm.querySelector('.img-upload__cancel');
@@ -33,9 +36,18 @@ function onDocumentKeydown(evt) {
   }
 }
 
-function cancelEscape(evt) {
-  if (isEscapeEvt(evt)) {
-    evt.stopPropagation();
+function renderImgPreview() {
+  const imgUpload = imgUploadInput.files[0];
+  const imgName = imgUpload.name.toLowerCase();
+  const matches = IMG_EXTENSIONS.some((it) => imgName.endsWith(it));
+
+  if(matches) {
+    const imgFiltersPrewievs = imgUploadForm.querySelectorAll('.effects__preview');
+    imgUploadPreview.src = URL.createObjectURL(imgUpload);
+
+    imgFiltersPrewievs.forEach((item) => {
+      item.style = `background-image: url('${imgUploadPreview.src}')`;
+    });
   }
 }
 
@@ -56,21 +68,15 @@ function enabledButtonSubmit() {
 function setFormSubmit() {
   imgUploadForm.addEventListener('submit', (evt) => {
     evt.preventDefault();
-
     const isValid = pristine.validate();
     if (isValid) {
       disabledButtonSubmit();
       const formData = new FormData(evt.target);
-      fetch (
-        'https://32.javascript.htmlacademy.pro/kekstagram',
-        {
-          method: 'POST',
-          body: formData
-        }
-      )
+      sendData(formData)
         .then((response) => {
-          if(response.ok) {
+          if(response) {
             showUploadSuccess();
+            closeModal();
           }
         })
         .catch(() => {
@@ -84,16 +90,18 @@ function setFormSubmit() {
 }
 
 function showModal() {
-  body.classList.add('modal-open');
   imgUploadOverlay.classList.remove('hidden');
+  body.classList.add('modal-open');
   document.addEventListener('keydown', onDocumentKeydown);
   hashtagInput.addEventListener('keydown', cancelEscape);
   imgComment.addEventListener('keydown', cancelEscape);
+  renderImgPreview();
+  setFormSubmit();
 }
 
 function closeModal() {
-  body.classList.remove('modal-open');
   imgUploadOverlay.classList.add('hidden');
+  body.classList.remove('modal-open');
   document.removeEventListener('keydown', onDocumentKeydown);
   imgUploadForm.reset();
   pristine.reset();
@@ -147,4 +155,4 @@ pristine.addValidator(
 
 initSlider();
 
-export {setFormSubmit, closeModal};
+export {setFormSubmit, closeModal, enabledButtonSubmit, onDocumentKeydown};

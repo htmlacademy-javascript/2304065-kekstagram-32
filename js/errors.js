@@ -1,5 +1,5 @@
 import { isEscapeEvt } from './utils.js';
-import { closeModal } from './img-upload-form.js';
+import { closeModal, onDocumentKeydown } from './img-upload-form.js';
 
 const body = document.querySelector('body');
 const dataLoadingError = document.querySelector('#data-error').content.querySelector('.data-error').cloneNode(true);
@@ -45,15 +45,16 @@ function showDownloadError() {
 
 function showUploadError() {
   body.appendChild(photoUploadingError);
+  document.removeEventListener('keydown', onDocumentKeydown);
   errorButton.addEventListener('click', hideUploadError);
   document.addEventListener('click', onClickBodyError);
-  document.addEventListener('keydown', onEscapeKeyClickBodyError);
+  body.addEventListener('keydown', onEscapeKeyClickBodyError);
 }
 
 function hideUploadError() {
   body.removeChild(photoUploadingError);
   errorButton.removeEventListener('click', hideUploadError);
-  document.removeEventListener('click', onClickBodyError);
+  body.removeEventListener('click', onClickBodyError);
   document.removeEventListener('keydown', onEscapeKeyClickBodyError);
 }
 

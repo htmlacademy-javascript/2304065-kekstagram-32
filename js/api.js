@@ -1,26 +1,38 @@
-import { renderPosts } from './thumbnail.js';
-import { showDownloadError } from './errors.js';
+const SERVER_URL = 'https://32.javascript.htmlacademy.pro/kekstagram';
+const ROUTE = {
+  GET: '/data',
+  POST: '/',
+};
+const METHOD = {
+  GET: 'GET',
+  POST: 'POST',
+};
 
-// const photosArray = [];
-// Пришлось вернуть let, т.к. после объединения получался пустой массив
-let photosArray = [];
+const photosArray = [];
 
-function getData() {
-  fetch('https://32.javascript.htmlacademy.pro/kekstagram/data')
+function makeRequest(url, route, method, body = null) {
+  return fetch(`${url}${route}`, {method, body})
     .then((response) => {
-      if(response.ok) {
+      if (response.ok) {
         return response.json();
       }
-      throw new Error();
-    })
-    .then((photos) => {
-      renderPosts(photos);
-      // photosArray.concat(photos);
-      photosArray = photos;
-    })
-    .catch(() => {
-      showDownloadError();
+      throw new Error('Не удалось получить данные');
     });
 }
 
-export {getData, photosArray};
+function getData() {
+  return makeRequest(SERVER_URL, ROUTE.GET, METHOD.GET)
+    .then((data) => {
+      photosArray.push(...data);
+      return photosArray;
+    })
+    .catch(() => {
+      throw new Error('Не удалось загрузить данные');
+    });
+}
+
+function sendData(body) {
+  return makeRequest(SERVER_URL, ROUTE.POST, METHOD.POST, body);
+}
+
+export {getData, sendData, photosArray};
