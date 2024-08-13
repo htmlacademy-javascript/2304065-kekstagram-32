@@ -76,6 +76,7 @@ function setFormSubmit() {
         .then((response) => {
           if(response) {
             showUploadSuccess();
+            closeModal();
           }
         })
         .catch(() => {
