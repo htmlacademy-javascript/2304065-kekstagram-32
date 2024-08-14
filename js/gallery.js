@@ -3,7 +3,7 @@ import { isEscapeEvt } from './utils.js';
 
 const COMMENT_STEP = 5;
 let commentShown = 0;
-let commentArray = [];
+let commentsArray = [];
 
 const body = document.querySelector('body');
 const bigPictureContainer = document.querySelector('.big-picture');
@@ -21,7 +21,7 @@ bigPictureContainerClose.addEventListener('click', closeBigPicture);
 commentsLoader.addEventListener('click', onCommentsLoaderClick);
 
 function onCommentsLoaderClick() {
-  renderComments(commentArray);
+  renderComments(commentsArray);
 }
 
 
@@ -47,7 +47,7 @@ function openBigPicture ({url, likes, description, comments}) {
   bigPictureCommentsCountTotal.textContent = comments.length;
   bigPictureDesc.textContent = description;
 
-  commentArray = {url, likes, description, comments}.comments;
+  commentsArray = {url, likes, description, comments}.comments;
   renderComments(comments);
 }
 
