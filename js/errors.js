@@ -64,14 +64,14 @@ function hideUploadError() {
 
 const showUploadSuccess = () => {
   body.appendChild(photoUploadingSuccess);
-  successButton.addEventListener('.click', onSuccessButtonClick);
+  successButton.addEventListener('click', onSuccessButtonClick);
   document.addEventListener('click', onBodySuccessClick);
   document.addEventListener('keydown', onBodySuccesKeydown);
 };
 
 function onSuccessButtonClick() {
   body.removeChild(photoUploadingSuccess);
-  successButton.addEventListener('.click', onSuccessButtonClick);
+  successButton.addEventListener('click', onSuccessButtonClick);
   document.removeEventListener('click', onBodySuccessClick);
   document.removeEventListener('keydown', onBodySuccesKeydown);
   onImgUploadCancelClick();
