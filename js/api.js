@@ -1,7 +1,7 @@
 const SERVER_URL = 'https://32.javascript.htmlacademy.pro/kekstagram';
 const ROUTE = {
   GET: '/data',
-  POST: '/',
+  POST: '//',
 };
 const METHOD = {
   GET: 'GET',
@@ -16,7 +16,7 @@ function makeRequest(url, route, method, body = null) {
       if (response.ok) {
         return response.json();
       }
-      throw new Error('Не удалось получить данные');
+      throw new Error('Что-то пошло не так...');
     });
 }
 
@@ -27,7 +27,7 @@ function getData() {
       return photosArray;
     })
     .catch(() => {
-      throw new Error('Не удалось загрузить данные');
+      throw new Error('Что-то пошло не так...');
     });
 }
 

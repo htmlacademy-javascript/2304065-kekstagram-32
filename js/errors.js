@@ -15,6 +15,10 @@ function onClickBodyError(evt) {
   }
 }
 
+function onErrorButtonCLick() {
+  hideUploadError();
+}
+
 function onClickBodySuccess(evt) {
   if (!evt.target.matches('.success__inner') && !evt.target.matches('.success__title')) {
     evt.preventDefault();
@@ -44,18 +48,18 @@ function showDownloadError() {
 }
 
 function showUploadError() {
-  body.appendChild(photoUploadingError);
   document.removeEventListener('keydown', onDocumentKeydown);
-  errorButton.addEventListener('click', hideUploadError);
+  errorButton.addEventListener('click', onErrorButtonCLick);
   document.addEventListener('click', onClickBodyError);
   body.addEventListener('keydown', onEscapeKeyClickBodyError);
+  body.appendChild(photoUploadingError);
 }
 
 function hideUploadError() {
-  body.removeChild(photoUploadingError);
-  errorButton.removeEventListener('click', hideUploadError);
+  errorButton.removeEventListener('click', onErrorButtonCLick);
   body.removeEventListener('click', onClickBodyError);
   document.removeEventListener('keydown', onEscapeKeyClickBodyError);
+  photoUploadingError.remove();
 }
 
 function showUploadSuccess() {
