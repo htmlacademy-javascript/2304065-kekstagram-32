@@ -50,7 +50,6 @@ const delayFilter = () => {
   });
 };
 
-
 const initFilter = () => {
   imgFilters.classList.remove('img-filters--inactive');
 };

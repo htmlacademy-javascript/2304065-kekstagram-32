@@ -17,16 +17,17 @@ const commentsLoader = bigPictureContainer.querySelector('.comments-loader');
 const commentsList = bigPictureContainer.querySelector('.social__comments');
 const commentTemplate = document.querySelector('#comment').content.querySelector('.social__comment');
 
-const onCommentsLoaderClick = () => {
-  renderComments(commentsArray);
-};
-
 commentsLoader.addEventListener('click', onCommentsLoaderClick);
+bigPictureContainerClose.addEventListener('click', onBigPictureContainerCloseClick);
+
+function onCommentsLoaderClick() {
+  renderComments(commentsArray);
+}
 
 const onDocumentKeydown = (evt) => {
   if (isEscapeEvt(evt)) {
     evt.preventDefault();
-    closeBigPicture();
+    onBigPictureContainerCloseClick();
   }
 };
 
@@ -49,7 +50,7 @@ const openBigPicture = ({url, likes, description, comments}) => {
   renderComments(comments);
 };
 
-function closeBigPicture() {
+function onBigPictureContainerCloseClick() {
   bigPictureContainer.classList.add('hidden');
   body.classList.remove('modal-open');
   document.removeEventListener('keydown', onDocumentKeydown);
@@ -91,6 +92,4 @@ function renderComments(comment) {
   commentsList.appendChild(fragment);
 }
 
-bigPictureContainerClose.addEventListener('click', closeBigPicture);
-
-export {openBigPicture, closeBigPicture};
+export {openBigPicture, onBigPictureContainerCloseClick};

@@ -1,4 +1,4 @@
-import { isEscapeEvt, cancelEscape } from './utils.js';
+import { isEscapeEvt, onInputEscapeKeydown } from './utils.js';
 import { resetScale } from './scale.js';
 import { initSlider, resetSlider } from './effect.js';
 import { showUploadError, showUploadSuccess } from './errors.js';
@@ -23,6 +23,9 @@ const hashtagInput = imgUploadForm.querySelector('.text__hashtags');
 const imgComment = imgUploadForm.querySelector('.text__description');
 const buttonUploadSubmit = imgUploadForm.querySelector('.img-upload__submit');
 
+imgUploadInput.addEventListener('change', onImgUploadInputChange);
+imgUploadCancel.addEventListener('click', onImgUploadCancelClick);
+
 const pristine = new Pristine(imgUploadForm, {
   classTo: 'img-upload__field-wrapper',
   errorTextParent: 'img-upload__field-wrapper',
@@ -32,7 +35,7 @@ const pristine = new Pristine(imgUploadForm, {
 const onDocumentKeydown = (evt) => {
   if (isEscapeEvt(evt)) {
     evt.preventDefault();
-    closeModal();
+    onImgUploadCancelClick();
   }
 };
 
@@ -51,9 +54,9 @@ const renderImgPreview = () => {
   }
 };
 
-const onImgUploadEditing = () => {
+function onImgUploadInputChange() {
   showModal();
-};
+}
 
 const disabledButtonSubmit = () => {
   buttonUploadSubmit.disabled = true;
@@ -76,7 +79,7 @@ const setFormSubmit = () => {
         .then((response) => {
           if(response) {
             showUploadSuccess();
-            closeModal();
+            onImgUploadCancelClick();
           }
         })
         .catch(() => {
@@ -93,13 +96,13 @@ function showModal() {
   imgUploadOverlay.classList.remove('hidden');
   body.classList.add('modal-open');
   document.addEventListener('keydown', onDocumentKeydown);
-  hashtagInput.addEventListener('keydown', cancelEscape);
-  imgComment.addEventListener('keydown', cancelEscape);
+  hashtagInput.addEventListener('keydown', onInputEscapeKeydown);
+  imgComment.addEventListener('keydown', onInputEscapeKeydown);
   renderImgPreview();
   setFormSubmit();
 }
 
-function closeModal() {
+function onImgUploadCancelClick() {
   imgUploadOverlay.classList.add('hidden');
   body.classList.remove('modal-open');
   document.removeEventListener('keydown', onDocumentKeydown);
@@ -108,9 +111,6 @@ function closeModal() {
   resetScale();
   resetSlider();
 }
-
-imgUploadInput.addEventListener('change', onImgUploadEditing);
-imgUploadCancel.addEventListener('click', closeModal);
 
 const normalizeHashtag = (string) => string.trim().split(' ').filter((tag) => Boolean(tag.length));
 
@@ -149,4 +149,4 @@ pristine.addValidator(
 
 initSlider();
 
-export {setFormSubmit, closeModal, enabledButtonSubmit, onDocumentKeydown};
+export {setFormSubmit, onImgUploadCancelClick, enabledButtonSubmit, onDocumentKeydown};

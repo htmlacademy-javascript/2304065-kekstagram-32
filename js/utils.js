@@ -23,7 +23,7 @@ const createUniqNumber = (min, max) => {
 
 const isEscapeEvt = (evt) => evt.key === 'Escape';
 
-const cancelEscape = (evt) => {
+const onInputEscapeKeydown = (evt) => {
   if (isEscapeEvt(evt)) {
     evt.stopPropagation();
   }
@@ -38,4 +38,4 @@ const debounce = (callback, timeoutDelay) => {
   };
 };
 
-export { createUniqNumber, getRandomInteger, isEscapeEvt, debounce, cancelEscape};
+export { createUniqNumber, getRandomInteger, isEscapeEvt, debounce, onInputEscapeKeydown};
