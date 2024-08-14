@@ -125,8 +125,8 @@ function hasValid(value) {
 }
 
 function hasUniq(value) {
-  const lowerCaseTag = normalizeHashtag(value).map((tag) => tag.toLowerCase());
-  return lowerCaseTag.length === new Set(lowerCaseTag).size;
+  const lowerCaseTags = normalizeHashtag(value).map((tags) => tags.toLowerCase());
+  return lowerCaseTags.length === new Set(lowerCaseTags).size;
 }
 
 pristine.addValidator(
