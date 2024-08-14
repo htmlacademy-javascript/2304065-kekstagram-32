@@ -1,11 +1,11 @@
-function getRandomInteger(min, max) {
+const getRandomInteger = (min, max) => {
   const lower = Math.ceil(Math.min(min, max));
   const upper = Math.floor(Math.max(min, max));
   const result = Math.random() * (upper - lower + 1) + lower;
   return Math.floor(result);
-}
+};
 
-function createUniqNumber (min, max) {
+const createUniqNumber = (min, max) => {
   const previousNumb = [];
 
   return function() {
@@ -19,25 +19,23 @@ function createUniqNumber (min, max) {
     previousNumb.push(currentNum);
     return currentNum;
   };
-}
+};
 
-function isEscapeEvt (evt) {
-  return evt.key === 'Escape';
-}
+const isEscapeEvt = (evt) => evt.key === 'Escape';
 
-function cancelEscape(evt) {
+const onInputEscapeKeydown = (evt) => {
   if (isEscapeEvt(evt)) {
     evt.stopPropagation();
   }
-}
+};
 
-function debounce(callback, timeoutDelay) {
+const debounce = (callback, timeoutDelay) => {
   let timeoutId;
 
   return (...rest) => {
     clearTimeout(timeoutId);
     timeoutId = setTimeout(() => callback.apply(this, rest), timeoutDelay);
   };
-}
+};
 
-export { createUniqNumber, getRandomInteger, isEscapeEvt, debounce, cancelEscape};
+export { createUniqNumber, getRandomInteger, isEscapeEvt, debounce, onInputEscapeKeydown};

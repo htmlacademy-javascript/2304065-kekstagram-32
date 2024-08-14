@@ -1,4 +1,4 @@
-import { isEscapeEvt, cancelEscape } from './utils.js';
+import { isEscapeEvt, onInputEscapeKeydown } from './utils.js';
 import { resetScale } from './scale.js';
 import { initSlider, resetSlider } from './effect.js';
 import { showUploadError, showUploadSuccess } from './errors.js';
@@ -23,20 +23,23 @@ const hashtagInput = imgUploadForm.querySelector('.text__hashtags');
 const imgComment = imgUploadForm.querySelector('.text__description');
 const buttonUploadSubmit = imgUploadForm.querySelector('.img-upload__submit');
 
+imgUploadInput.addEventListener('change', onImgUploadInputChange);
+imgUploadCancel.addEventListener('click', onImgUploadCancelClick);
+
 const pristine = new Pristine(imgUploadForm, {
   classTo: 'img-upload__field-wrapper',
   errorTextParent: 'img-upload__field-wrapper',
   errorTextClass: 'img-upload__field-wrapper--error'
 });
 
-function onDocumentKeydown(evt) {
+const onDocumentKeydown = (evt) => {
   if (isEscapeEvt(evt)) {
     evt.preventDefault();
-    closeModal();
+    onImgUploadCancelClick();
   }
-}
+};
 
-function renderImgPreview() {
+const renderImgPreview = () => {
   const imgUpload = imgUploadInput.files[0];
   const imgName = imgUpload.name.toLowerCase();
   const matches = IMG_EXTENSIONS.some((it) => imgName.endsWith(it));
@@ -49,23 +52,23 @@ function renderImgPreview() {
       item.style = `background-image: url('${imgUploadPreview.src}')`;
     });
   }
-}
+};
 
-function onImgUploadEditing() {
+function onImgUploadInputChange() {
   showModal();
 }
 
-function disabledButtonSubmit() {
+const disabledButtonSubmit = () => {
   buttonUploadSubmit.disabled = true;
   buttonUploadSubmit.textContent = 'Загружаем...';
-}
+};
 
-function enabledButtonSubmit() {
+const enabledButtonSubmit = () => {
   buttonUploadSubmit.disabled = false;
   buttonUploadSubmit.textContent = 'Опубликовать';
-}
+};
 
-function setFormSubmit() {
+const setFormSubmit = () => {
   imgUploadForm.addEventListener('submit', (evt) => {
     evt.preventDefault();
     const isValid = pristine.validate();
@@ -76,7 +79,7 @@ function setFormSubmit() {
         .then((response) => {
           if(response) {
             showUploadSuccess();
-            closeModal();
+            onImgUploadCancelClick();
           }
         })
         .catch(() => {
@@ -87,19 +90,19 @@ function setFormSubmit() {
         });
     }
   });
-}
+};
 
 function showModal() {
   imgUploadOverlay.classList.remove('hidden');
   body.classList.add('modal-open');
   document.addEventListener('keydown', onDocumentKeydown);
-  hashtagInput.addEventListener('keydown', cancelEscape);
-  imgComment.addEventListener('keydown', cancelEscape);
+  hashtagInput.addEventListener('keydown', onInputEscapeKeydown);
+  imgComment.addEventListener('keydown', onInputEscapeKeydown);
   renderImgPreview();
   setFormSubmit();
 }
 
-function closeModal() {
+function onImgUploadCancelClick() {
   imgUploadOverlay.classList.add('hidden');
   body.classList.remove('modal-open');
   document.removeEventListener('keydown', onDocumentKeydown);
@@ -109,25 +112,16 @@ function closeModal() {
   resetSlider();
 }
 
-imgUploadInput.addEventListener('change', onImgUploadEditing);
-imgUploadCancel.addEventListener('click', closeModal);
+const normalizeHashtag = (string) => string.trim().split(' ').filter((tag) => Boolean(tag.length));
 
-function normalizeHashtag(string) {
-  return string.trim().split(' ').filter((tag) => Boolean(tag.length));
-}
+const hasValidCount = (value) => normalizeHashtag(value).length <= MAX_HASHTAG_COUNT;
 
-function hasValidCount(value) {
-  return normalizeHashtag(value).length <= MAX_HASHTAG_COUNT;
-}
+const hasValid = (value) => normalizeHashtag(value).every((tag) => VALID_HASHTAG.test(tag));
 
-function hasValid(value) {
-  return normalizeHashtag(value).every((tag) => VALID_HASHTAG.test(tag));
-}
-
-function hasUniq(value) {
-  const lowerCaseTag = normalizeHashtag(value).map((tag) => tag.toLowerCase());
-  return lowerCaseTag.length === new Set(lowerCaseTag).size;
-}
+const hasUniq = (value) => {
+  const lowerCaseTags = normalizeHashtag(value).map((tags) => tags.toLowerCase());
+  return lowerCaseTags.length === new Set(lowerCaseTags).size;
+};
 
 pristine.addValidator(
   hashtagInput,
@@ -155,4 +149,4 @@ pristine.addValidator(
 
 initSlider();
 
-export {setFormSubmit, closeModal, enabledButtonSubmit, onDocumentKeydown};
+export {setFormSubmit, onImgUploadCancelClick, enabledButtonSubmit, onDocumentKeydown};

@@ -4,12 +4,12 @@ import { photosArray } from './api.js';
 const pictureTemplate = document.querySelector('#picture').content.querySelector('.picture');
 const picturesContainer = document.querySelector('.pictures');
 
-function clearPosts() {
+const clearPosts = () => {
   picturesContainer.querySelectorAll('.picture').forEach((item) => item.remove());
-}
+};
 
 
-function renderPosts(posts) {
+const renderPosts = (posts) => {
   clearPosts();
   const fragment = document.createDocumentFragment();
 
@@ -24,7 +24,7 @@ function renderPosts(posts) {
   });
 
   picturesContainer.appendChild(fragment);
-}
+};
 
 picturesContainer.addEventListener('click', (evt) => {
   const thumbnailElement = evt.target.closest('.picture');

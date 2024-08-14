@@ -10,29 +10,25 @@ const METHOD = {
 
 const photosArray = [];
 
-function makeRequest(url, route, method, body = null) {
-  return fetch(`${url}${route}`, {method, body})
+const makeRequest = (url, route, method, body = null) =>
+  fetch(`${url}${route}`, {method, body})
     .then((response) => {
       if (response.ok) {
         return response.json();
       }
-      throw new Error('Не удалось получить данные');
+      throw new Error('Что-то пошло не так...');
     });
-}
 
-function getData() {
-  return makeRequest(SERVER_URL, ROUTE.GET, METHOD.GET)
+const getData = () =>
+  makeRequest(SERVER_URL, ROUTE.GET, METHOD.GET)
     .then((data) => {
       photosArray.push(...data);
       return photosArray;
     })
     .catch(() => {
-      throw new Error('Не удалось загрузить данные');
+      throw new Error('Что-то пошло не так...');
     });
-}
 
-function sendData(body) {
-  return makeRequest(SERVER_URL, ROUTE.POST, METHOD.POST, body);
-}
+const sendData = (body) => makeRequest(SERVER_URL, ROUTE.POST, METHOD.POST, body);
 
 export {getData, sendData, photosArray};

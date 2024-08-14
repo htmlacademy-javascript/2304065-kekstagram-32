@@ -1,5 +1,5 @@
 import { isEscapeEvt } from './utils.js';
-import { closeModal, onDocumentKeydown } from './img-upload-form.js';
+import { onImgUploadCancelClick, onDocumentKeydown } from './img-upload-form.js';
 
 const body = document.querySelector('body');
 const dataLoadingError = document.querySelector('#data-error').content.querySelector('.data-error').cloneNode(true);
@@ -8,69 +8,73 @@ const photoUploadingError = document.querySelector('#error').content.querySelect
 const errorButton = photoUploadingError.querySelector('.error__button');
 const successButton = photoUploadingSuccess.querySelector('.success__button');
 
-function onClickBodyError(evt) {
+const onBodyErrorClick = (evt) => {
   if (!evt.target.matches('.error__inner') && !evt.target.matches('.error__title')) {
     evt.preventDefault();
     hideUploadError();
   }
-}
+};
 
-function onClickBodySuccess(evt) {
+const onErrorButtonCLick = () => {
+  hideUploadError();
+};
+
+const onBodySuccessClick = (evt) => {
   if (!evt.target.matches('.success__inner') && !evt.target.matches('.success__title')) {
     evt.preventDefault();
-    hideUploadSuccess();
+    onSuccessButtonClick();
   }
-}
+};
 
-function onEscapeKeyClickBodyError(evt) {
+const onBodyErrorKeydown = (evt) => {
   if (isEscapeEvt(evt)) {
     evt.preventDefault();
     hideUploadError();
   }
-}
+};
 
-function onEscapeKeyClickBodySuccess(evt) {
+const onBodySuccesKeydown = (evt) => {
   if (isEscapeEvt(evt)) {
     evt.preventDefault();
-    hideUploadSuccess();
+    onSuccessButtonClick();
   }
-}
+};
 
-function showDownloadError() {
+const showDownloadError = () => {
   body.appendChild(dataLoadingError);
   setTimeout(() => {
     body.removeChild(dataLoadingError);
   }, 5000);
-}
+};
 
-function showUploadError() {
-  body.appendChild(photoUploadingError);
+const showUploadError = () => {
   document.removeEventListener('keydown', onDocumentKeydown);
-  errorButton.addEventListener('click', hideUploadError);
-  document.addEventListener('click', onClickBodyError);
-  body.addEventListener('keydown', onEscapeKeyClickBodyError);
-}
+  errorButton.addEventListener('click', onErrorButtonCLick);
+  document.addEventListener('click', onBodyErrorClick);
+  body.addEventListener('keydown', onBodyErrorKeydown);
+  body.appendChild(photoUploadingError);
+};
 
 function hideUploadError() {
-  body.removeChild(photoUploadingError);
-  errorButton.removeEventListener('click', hideUploadError);
-  body.removeEventListener('click', onClickBodyError);
-  document.removeEventListener('keydown', onEscapeKeyClickBodyError);
+  errorButton.removeEventListener('click', onErrorButtonCLick);
+  body.removeEventListener('click', onBodyErrorClick);
+  document.removeEventListener('keydown', onBodyErrorKeydown);
+  photoUploadingError.remove();
 }
 
-function showUploadSuccess() {
+const showUploadSuccess = () => {
   body.appendChild(photoUploadingSuccess);
-  successButton.addEventListener('.click', hideUploadSuccess);
-  document.addEventListener('click', onClickBodySuccess);
-  document.addEventListener('keydown', onEscapeKeyClickBodySuccess);
-}
+  successButton.addEventListener('click', onSuccessButtonClick);
+  document.addEventListener('click', onBodySuccessClick);
+  document.addEventListener('keydown', onBodySuccesKeydown);
+};
 
-function hideUploadSuccess() {
+function onSuccessButtonClick() {
   body.removeChild(photoUploadingSuccess);
-  successButton.addEventListener('.click', hideUploadSuccess);
-  document.removeEventListener('click', onClickBodySuccess);
-  document.removeEventListener('keydown', onEscapeKeyClickBodySuccess);
-  closeModal();
+  successButton.addEventListener('click', onSuccessButtonClick);
+  document.removeEventListener('click', onBodySuccessClick);
+  document.removeEventListener('keydown', onBodySuccesKeydown);
+  onImgUploadCancelClick();
 }
 
 export {showDownloadError, showUploadError, showUploadSuccess};

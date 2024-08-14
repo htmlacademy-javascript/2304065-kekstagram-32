@@ -3,7 +3,7 @@ import { isEscapeEvt } from './utils.js';
 
 const COMMENT_STEP = 5;
 let commentShown = 0;
-let commentArray = [];
+let commentsArray = [];
 
 const body = document.querySelector('body');
 const bigPictureContainer = document.querySelector('.big-picture');
@@ -17,26 +17,25 @@ const commentsLoader = bigPictureContainer.querySelector('.comments-loader');
 const commentsList = bigPictureContainer.querySelector('.social__comments');
 const commentTemplate = document.querySelector('#comment').content.querySelector('.social__comment');
 
-bigPictureContainerClose.addEventListener('click', closeBigPicture);
 commentsLoader.addEventListener('click', onCommentsLoaderClick);
+bigPictureContainerClose.addEventListener('click', onBigPictureContainerCloseClick);
 
 function onCommentsLoaderClick() {
-  renderComments(commentArray);
+  renderComments(commentsArray);
 }
 
-
-function onDocumentKeydown (evt) {
+const onDocumentKeydown = (evt) => {
   if (isEscapeEvt(evt)) {
     evt.preventDefault();
-    closeBigPicture();
+    onBigPictureContainerCloseClick();
   }
-}
+};
 
-function clearComments() {
+const clearComments = () => {
   commentsList.querySelectorAll('.social__comment').forEach((item) => item.remove());
-}
+};
 
-function openBigPicture ({url, likes, description, comments}) {
+const openBigPicture = ({url, likes, description, comments}) => {
   bigPictureContainer.classList.remove('hidden');
   body.classList.add('modal-open');
   document.addEventListener('keydown', onDocumentKeydown);
@@ -47,18 +46,18 @@ function openBigPicture ({url, likes, description, comments}) {
   bigPictureCommentsCountTotal.textContent = comments.length;
   bigPictureDesc.textContent = description;
 
-  commentArray = {url, likes, description, comments}.comments;
+  commentsArray = {url, likes, description, comments}.comments;
   renderComments(comments);
-}
+};
 
-function closeBigPicture() {
+function onBigPictureContainerCloseClick() {
   bigPictureContainer.classList.add('hidden');
   body.classList.remove('modal-open');
   document.removeEventListener('keydown', onDocumentKeydown);
   commentShown = 0;
 }
 
-function createComment({avatar, name, message}) {
+const createComment = ({avatar, name, message}) => {
 
   const comment = commentTemplate.cloneNode(true);
   comment.querySelector('.social__picture').src = avatar;
@@ -66,7 +65,7 @@ function createComment({avatar, name, message}) {
   comment.querySelector('.social__text').textContent = message;
 
   return comment;
-}
+};
 
 function renderComments(comment) {
   clearComments();
@@ -93,4 +92,4 @@ function renderComments(comment) {
   commentsList.appendChild(fragment);
 }
 
-export {openBigPicture, closeBigPicture};
+export {openBigPicture, onBigPictureContainerCloseClick};
