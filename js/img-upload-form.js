@@ -65,30 +65,6 @@ function enabledButtonSubmit() {
   buttonUploadSubmit.textContent = 'Опубликовать';
 }
 
-// function setFormSubmit() {
-//   imgUploadForm.addEventListener('submit', async(evt) => {
-//     evt.preventDefault();
-//     try {
-//       disabledButtonSubmit();
-//       const isValid = pristine.validate();
-//       if (isValid) {
-//         const formData = new FormData(evt.target);
-//         await sendData(formData)
-//           .then((response) => {
-//             if(response) {
-//               showUploadSuccess();
-//               closeModal();
-//             }
-//           });
-//       }
-//     } catch {
-//       showUploadError();
-//     } finally {
-//       enabledButtonSubmit();
-//     }
-//   });
-// }
-
 function setFormSubmit() {
   imgUploadForm.addEventListener('submit', (evt) => {
     evt.preventDefault();
