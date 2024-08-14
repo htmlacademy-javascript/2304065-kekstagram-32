@@ -8,22 +8,22 @@ const buttonScaleBigger = imgUploadForm.querySelector('.scale__control--bigger')
 const inputScaleValue = imgUploadForm.querySelector('.scale__control--value');
 const imgPreview = imgUploadForm.querySelector('.img-upload__preview img');
 
-function scaleImg(value) {
+const scaleImg = (value) => {
   imgPreview.style.transform = `scale(${value / 100})`;
   inputScaleValue.value = `${value}%`;
-}
+};
 
-function onButtonScaleSmallerCLick() {
+const onButtonScaleSmallerCLick = () => {
   scaleImg(Math.max(parseInt(inputScaleValue.value, 10) - SCALE_STEP, MIN_SCALE));
-}
+};
 
-function onButtonScaleBiggerCLick() {
+const onButtonScaleBiggerCLick = () => {
   scaleImg(Math.min(parseInt(inputScaleValue.value, 10) + SCALE_STEP, MAX_SCALE));
-}
+};
 
-function resetScale() {
+const resetScale = () => {
   scaleImg(MAX_SCALE);
-}
+};
 
 buttonScaleSmaller.addEventListener('click', onButtonScaleSmallerCLick);
 buttonScaleBigger.addEventListener('click', onButtonScaleBiggerCLick);

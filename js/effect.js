@@ -72,11 +72,9 @@ const effectsElement = imgUploadForm.querySelector('.img-upload__effects');
 
 let chosenEffect = Effect.DEFAULT;
 
-function isDefault() {
-  return chosenEffect === Effect.DEFAULT;
-}
+const isDefault = () => chosenEffect === Effect.DEFAULT;
 
-function setImgStyle() {
+const setImgStyle = () => {
   if(isDefault()) {
     imgElement.style.filter = null;
     return;
@@ -85,22 +83,22 @@ function setImgStyle() {
   const {value} = effectLevelElement;
   const {style, unit} = effectToFilter[chosenEffect];
   imgElement.style.filter = `${style}(${value}${unit})`;
-}
+};
 
-function showSlider() {
+const showSlider = () => {
   sliderContainerElement.classList.remove('hidden');
-}
+};
 
-function hideSlider() {
+const hideSlider = () => {
   sliderContainerElement.classList.add('hidden');
-}
+};
 
-function onSliderUpdate() {
+const onSliderUpdate = () => {
   effectLevelElement.value = sliderElement.noUiSlider.get();
   setImgStyle();
-}
+};
 
-function createSlider({min, max, step}) {
+const createSlider = ({min, max, step}) => {
   noUiSlider.create(sliderElement, {
     range: { min, max },
     start: max,
@@ -118,42 +116,42 @@ function createSlider({min, max, step}) {
 
   sliderElement.noUiSlider.on('update', onSliderUpdate);
   hideSlider();
-}
+};
 
-function updateSlider({min, max, step}) {
+const updateSlider = ({min, max, step}) => {
   sliderElement.noUiSlider.updateOptions({
     range: {min, max},
     start: max,
     step,
   });
-}
+};
 
-function setSlider() {
+const setSlider = () => {
   if(isDefault()) {
     hideSlider();
   } else {
     updateSlider(effectToSliderOptions[chosenEffect]);
     showSlider();
   }
-}
+};
 
-function setEffect(effect) {
+const setEffect = (effect) => {
   chosenEffect = effect;
   setSlider();
   setImgStyle();
-}
+};
 
-function resetSlider() {
+const resetSlider = () => {
   setEffect(Effect.DEFAULT);
-}
+};
 
-function onEffectChange(evt) {
+const onEffectChange = (evt) => {
   setEffect(evt.target.value);
-}
+};
 
-function initSlider() {
+const initSlider = () => {
   createSlider(effectToSliderOptions[chosenEffect]);
   effectsElement.addEventListener('change', onEffectChange);
-}
+};
 
 export {initSlider, resetSlider};

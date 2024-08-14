@@ -8,52 +8,52 @@ const photoUploadingError = document.querySelector('#error').content.querySelect
 const errorButton = photoUploadingError.querySelector('.error__button');
 const successButton = photoUploadingSuccess.querySelector('.success__button');
 
-function onClickBodyError(evt) {
+const onClickBodyError = (evt) => {
   if (!evt.target.matches('.error__inner') && !evt.target.matches('.error__title')) {
     evt.preventDefault();
     hideUploadError();
   }
-}
+};
 
-function onErrorButtonCLick() {
+const onErrorButtonCLick = () => {
   hideUploadError();
-}
+};
 
-function onClickBodySuccess(evt) {
+const onClickBodySuccess = (evt) => {
   if (!evt.target.matches('.success__inner') && !evt.target.matches('.success__title')) {
     evt.preventDefault();
     hideUploadSuccess();
   }
-}
+};
 
-function onEscapeKeyClickBodyError(evt) {
+const onEscapeKeyClickBodyError = (evt) => {
   if (isEscapeEvt(evt)) {
     evt.preventDefault();
     hideUploadError();
   }
-}
+};
 
-function onEscapeKeyClickBodySuccess(evt) {
+const onEscapeKeyClickBodySuccess = (evt) => {
   if (isEscapeEvt(evt)) {
     evt.preventDefault();
     hideUploadSuccess();
   }
-}
+};
 
-function showDownloadError() {
+const showDownloadError = () => {
   body.appendChild(dataLoadingError);
   setTimeout(() => {
     body.removeChild(dataLoadingError);
   }, 5000);
-}
+};
 
-function showUploadError() {
+const showUploadError = () => {
   document.removeEventListener('keydown', onDocumentKeydown);
   errorButton.addEventListener('click', onErrorButtonCLick);
   document.addEventListener('click', onClickBodyError);
   body.addEventListener('keydown', onEscapeKeyClickBodyError);
   body.appendChild(photoUploadingError);
-}
+};
 
 function hideUploadError() {
   errorButton.removeEventListener('click', onErrorButtonCLick);
@@ -62,12 +62,12 @@ function hideUploadError() {
   photoUploadingError.remove();
 }
 
-function showUploadSuccess() {
+const showUploadSuccess = () => {
   body.appendChild(photoUploadingSuccess);
   successButton.addEventListener('.click', hideUploadSuccess);
   document.addEventListener('click', onClickBodySuccess);
   document.addEventListener('keydown', onEscapeKeyClickBodySuccess);
-}
+};
 
 function hideUploadSuccess() {
   body.removeChild(photoUploadingSuccess);

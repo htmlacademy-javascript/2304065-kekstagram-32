@@ -13,19 +13,13 @@ const FilterTypes = {
 const imgFilters = document.querySelector('.img-filters');
 const imgFiltersForm = imgFilters.querySelector('.img-filters__form');
 
-function sortCommentsDescending(postA, postB) {
-  return postB.comments.length - postA.comments.length;
-}
+const sortCommentsDescending = (postA, postB) => postB.comments.length - postA.comments.length;
 
-function sortIdInOrder(idA, idB) {
-  return idA.id - idB.id;
-}
+const sortIdInOrder = (idA, idB) => idA.id - idB.id;
 
-function sortRandom() {
-  return Math.random() - 0.5;
-}
+const sortRandom = () => Math.random() - 0.5;
 
-function filter(evt) {
+const filter = (evt) => {
   onFilterClick(evt);
 
   if (evt.target.id === FilterTypes.DEFAULT) {
@@ -37,7 +31,7 @@ function filter(evt) {
   if (evt.target.id === FilterTypes.DISCUSSED) {
     return renderPosts(photosArray.slice().sort(sortCommentsDescending));
   }
-}
+};
 
 function onFilterClick(evt) {
   if (evt.target.classList.contains('img-filters__button--active') || evt.target.classList.contains('img-filters')) {
@@ -48,18 +42,17 @@ function onFilterClick(evt) {
   evt.target.classList.add('img-filters__button--active');
 }
 
-function delayFilter() {
+const delayFilter = () => {
   const debouncedFilter = debounce(filter, RENDER_POSTS_DELAY);
   imgFiltersForm.addEventListener('click', (evt) => {
     onFilterClick(evt);
     debouncedFilter(evt);
   });
+};
 
-}
 
-
-function initFilter() {
+const initFilter = () => {
   imgFilters.classList.remove('img-filters--inactive');
-}
+};
 
 export {initFilter, delayFilter};

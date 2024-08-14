@@ -29,14 +29,14 @@ const pristine = new Pristine(imgUploadForm, {
   errorTextClass: 'img-upload__field-wrapper--error'
 });
 
-function onDocumentKeydown(evt) {
+const onDocumentKeydown = (evt) => {
   if (isEscapeEvt(evt)) {
     evt.preventDefault();
     closeModal();
   }
-}
+};
 
-function renderImgPreview() {
+const renderImgPreview = () => {
   const imgUpload = imgUploadInput.files[0];
   const imgName = imgUpload.name.toLowerCase();
   const matches = IMG_EXTENSIONS.some((it) => imgName.endsWith(it));
@@ -49,23 +49,23 @@ function renderImgPreview() {
       item.style = `background-image: url('${imgUploadPreview.src}')`;
     });
   }
-}
+};
 
-function onImgUploadEditing() {
+const onImgUploadEditing = () => {
   showModal();
-}
+};
 
-function disabledButtonSubmit() {
+const disabledButtonSubmit = () => {
   buttonUploadSubmit.disabled = true;
   buttonUploadSubmit.textContent = 'Загружаем...';
-}
+};
 
-function enabledButtonSubmit() {
+const enabledButtonSubmit = () => {
   buttonUploadSubmit.disabled = false;
   buttonUploadSubmit.textContent = 'Опубликовать';
-}
+};
 
-function setFormSubmit() {
+const setFormSubmit = () => {
   imgUploadForm.addEventListener('submit', (evt) => {
     evt.preventDefault();
     const isValid = pristine.validate();
@@ -87,7 +87,7 @@ function setFormSubmit() {
         });
     }
   });
-}
+};
 
 function showModal() {
   imgUploadOverlay.classList.remove('hidden');
@@ -112,22 +112,16 @@ function closeModal() {
 imgUploadInput.addEventListener('change', onImgUploadEditing);
 imgUploadCancel.addEventListener('click', closeModal);
 
-function normalizeHashtag(string) {
-  return string.trim().split(' ').filter((tag) => Boolean(tag.length));
-}
+const normalizeHashtag = (string) => string.trim().split(' ').filter((tag) => Boolean(tag.length));
 
-function hasValidCount(value) {
-  return normalizeHashtag(value).length <= MAX_HASHTAG_COUNT;
-}
+const hasValidCount = (value) => normalizeHashtag(value).length <= MAX_HASHTAG_COUNT;
 
-function hasValid(value) {
-  return normalizeHashtag(value).every((tag) => VALID_HASHTAG.test(tag));
-}
+const hasValid = (value) => normalizeHashtag(value).every((tag) => VALID_HASHTAG.test(tag));
 
-function hasUniq(value) {
+const hasUniq = (value) => {
   const lowerCaseTags = normalizeHashtag(value).map((tags) => tags.toLowerCase());
   return lowerCaseTags.length === new Set(lowerCaseTags).size;
-}
+};
 
 pristine.addValidator(
   hashtagInput,

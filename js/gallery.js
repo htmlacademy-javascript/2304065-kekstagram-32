@@ -17,26 +17,24 @@ const commentsLoader = bigPictureContainer.querySelector('.comments-loader');
 const commentsList = bigPictureContainer.querySelector('.social__comments');
 const commentTemplate = document.querySelector('#comment').content.querySelector('.social__comment');
 
-bigPictureContainerClose.addEventListener('click', closeBigPicture);
+const onCommentsLoaderClick = () => {
+  renderComments(commentsArray);
+};
+
 commentsLoader.addEventListener('click', onCommentsLoaderClick);
 
-function onCommentsLoaderClick() {
-  renderComments(commentsArray);
-}
-
-
-function onDocumentKeydown (evt) {
+const onDocumentKeydown = (evt) => {
   if (isEscapeEvt(evt)) {
     evt.preventDefault();
     closeBigPicture();
   }
-}
+};
 
-function clearComments() {
+const clearComments = () => {
   commentsList.querySelectorAll('.social__comment').forEach((item) => item.remove());
-}
+};
 
-function openBigPicture ({url, likes, description, comments}) {
+const openBigPicture = ({url, likes, description, comments}) => {
   bigPictureContainer.classList.remove('hidden');
   body.classList.add('modal-open');
   document.addEventListener('keydown', onDocumentKeydown);
@@ -49,7 +47,7 @@ function openBigPicture ({url, likes, description, comments}) {
 
   commentsArray = {url, likes, description, comments}.comments;
   renderComments(comments);
-}
+};
 
 function closeBigPicture() {
   bigPictureContainer.classList.add('hidden');
@@ -58,7 +56,7 @@ function closeBigPicture() {
   commentShown = 0;
 }
 
-function createComment({avatar, name, message}) {
+const createComment = ({avatar, name, message}) => {
 
   const comment = commentTemplate.cloneNode(true);
   comment.querySelector('.social__picture').src = avatar;
@@ -66,7 +64,7 @@ function createComment({avatar, name, message}) {
   comment.querySelector('.social__text').textContent = message;
 
   return comment;
-}
+};
 
 function renderComments(comment) {
   clearComments();
@@ -92,5 +90,7 @@ function renderComments(comment) {
 
   commentsList.appendChild(fragment);
 }
+
+bigPictureContainerClose.addEventListener('click', closeBigPicture);
 
 export {openBigPicture, closeBigPicture};
